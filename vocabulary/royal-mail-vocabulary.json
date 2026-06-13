@@ -1,0 +1,110 @@
+{
+  "vocabulary": {
+    "name": "Royal Mail API Vocabulary",
+    "description": "Domain vocabulary for Royal Mail shipping, tracking, and logistics APIs.",
+    "version": "1.0.0",
+    "source": "https://developer.royalmail.net/",
+    "terms": [
+      {
+        "term": "OBA",
+        "label": "Online Business Account",
+        "definition": "A Royal Mail account type required to access the Shipping V2 and label generation APIs. Enables account customers to create shipments and produce labels programmatically."
+      },
+      {
+        "term": "orderIdentifier",
+        "label": "Order Identifier",
+        "definition": "A unique integer identifier assigned by the Click and Drop system to each order upon creation."
+      },
+      {
+        "term": "orderReference",
+        "label": "Order Reference",
+        "definition": "A customer-defined string reference for an order, up to 40 characters."
+      },
+      {
+        "term": "trackingNumber",
+        "label": "Tracking Number",
+        "definition": "A Royal Mail barcode/tracking number assigned to a shipment, used for track-and-trace purposes."
+      },
+      {
+        "term": "manifest",
+        "label": "Manifest",
+        "definition": "A formal declaration of all orders despatched in a given collection, submitted to Royal Mail to confirm shipment. Manifesting is required before items enter the Royal Mail network."
+      },
+      {
+        "term": "manifestNumber",
+        "label": "Manifest Number",
+        "definition": "A unique integer identifier returned after a successful manifest operation, used to retrieve manifest paperwork."
+      },
+      {
+        "term": "serviceCode",
+        "label": "Service Code",
+        "definition": "A short alphanumeric code identifying a specific Royal Mail postal service, e.g. TRM24 for Tracked Returns 24."
+      },
+      {
+        "term": "packageFormatIdentifier",
+        "label": "Package Format Identifier",
+        "definition": "A string identifying the size format of a package. Accepted values include: undefined, letter, largeLetter, smallParcel, mediumParcel, largeParcel, parcel, documents."
+      },
+      {
+        "term": "localCollect",
+        "label": "Local Collect",
+        "definition": "A Click and Collect delivery option allowing parcels to be collected from participating Post Offices or Royal Mail Customer Service Points."
+      },
+      {
+        "term": "barcode",
+        "label": "Barcode",
+        "definition": "A machine-readable Royal Mail identifier affixed to a shipment for sorting and tracking. Can be pre-allocated for offline use via the Barcode Allocation API."
+      },
+      {
+        "term": "CN22",
+        "label": "CN22",
+        "definition": "A customs declaration form required for international small packets and printed papers sent outside the UK. Completed for items valued under a threshold."
+      },
+      {
+        "term": "CN23",
+        "label": "CN23",
+        "definition": "A detailed customs declaration form required for international parcels sent outside the UK, typically for higher-value or commercial items."
+      },
+      {
+        "term": "IOSS",
+        "label": "Import One-Stop Shop Number",
+        "definition": "An EU VAT registration number that allows businesses to declare, collect, and pay VAT on distance sales of imported goods to EU consumers."
+      },
+      {
+        "term": "EORI",
+        "label": "Economic Operators Registration and Identification Number",
+        "definition": "A unique identifier assigned to businesses that import or export goods in the EU and UK customs territory."
+      },
+      {
+        "term": "DDP",
+        "label": "Delivery Duty Paid",
+        "definition": "An Incoterm where the seller/shipper is responsible for paying all customs duties and taxes associated with an international shipment."
+      },
+      {
+        "term": "despatch",
+        "label": "Despatch",
+        "definition": "The act of sending an order into the Royal Mail network, typically confirmed by manifesting the order."
+      },
+      {
+        "term": "continuationToken",
+        "label": "Continuation Token",
+        "definition": "A pagination cursor token returned with paginated API responses, used to retrieve the next page of results."
+      },
+      {
+        "term": "safePlace",
+        "label": "Safe Place",
+        "definition": "A delivery instruction specifying a secure location where a parcel can be left if the recipient is not available."
+      },
+      {
+        "term": "consequentialLoss",
+        "label": "Consequential Loss",
+        "definition": "Optional additional compensation cover, in GBP, for the potential consequential loss arising from a delayed or lost item."
+      },
+      {
+        "term": "AIR",
+        "label": "Advance Import Reference",
+        "definition": "A reference number used for B2B orders shipping from Great Britain to Northern Ireland under the Windsor Framework."
+      }
+    ]
+  }
+}

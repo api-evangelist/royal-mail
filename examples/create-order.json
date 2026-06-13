@@ -1,0 +1,81 @@
+{
+  "summary": "Create a tracked domestic UK order",
+  "description": "Example request for creating a tracked 24 domestic UK parcel order via the Royal Mail Click and Drop API.",
+  "request": {
+    "items": [
+      {
+        "orderReference": "ORD-2026-001",
+        "isRecipientABusiness": false,
+        "recipient": {
+          "address": {
+            "fullName": "Jane Smith",
+            "addressLine1": "10 Downing Street",
+            "city": "London",
+            "postcode": "SW1A 2AA",
+            "countryCode": "GB"
+          },
+          "phoneNumber": "07700900000",
+          "emailAddress": "jane.smith@example.com"
+        },
+        "sender": {
+          "tradingName": "Example Shop Ltd",
+          "emailAddress": "orders@exampleshop.co.uk"
+        },
+        "packages": [
+          {
+            "weightInGrams": 500,
+            "packageFormatIdentifier": "smallParcel",
+            "dimensions": {
+              "heightInMms": 150,
+              "widthInMms": 200,
+              "depthInMms": 100
+            },
+            "contents": [
+              {
+                "name": "Blue Widget",
+                "SKU": "WIDGET-BLUE-001",
+                "quantity": 2,
+                "unitValue": 12.99,
+                "unitWeightInGrams": 200,
+                "customsDeclarationCategory": "commercialSaleOfGoods"
+              }
+            ]
+          }
+        ],
+        "orderDate": "2026-06-13T09:00:00Z",
+        "plannedDespatchDate": "2026-06-14T09:00:00Z",
+        "subtotal": 25.98,
+        "shippingCostCharged": 4.99,
+        "total": 30.97,
+        "currencyCode": "GBP",
+        "postageDetails": {
+          "sendNotificationsTo": "recipient",
+          "serviceCode": "TRM24",
+          "receiveEmailNotification": true,
+          "receiveSmsNotification": false,
+          "requestSignatureUponDelivery": false
+        }
+      }
+    ]
+  },
+  "response": {
+    "successCount": 1,
+    "errorsCount": 0,
+    "createdOrders": [
+      {
+        "orderIdentifier": 100123456,
+        "orderReference": "ORD-2026-001",
+        "createdOn": "2026-06-13T09:05:00Z",
+        "orderDate": "2026-06-13T09:00:00Z",
+        "trackingNumber": "TT123456789GB",
+        "packages": [
+          {
+            "packageNumber": 1,
+            "trackingNumber": "TT123456789GB"
+          }
+        ]
+      }
+    ],
+    "failedOrders": []
+  }
+}

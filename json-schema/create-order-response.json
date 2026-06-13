@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/royal-mail/main/json-schema/create-order-response.json",
+  "title": "CreateOrdersResponse",
+  "description": "Response schema for creating orders via the Royal Mail Click and Drop API.",
+  "type": "object",
+  "properties": {
+    "successCount": {
+      "type": "integer",
+      "description": "Number of successfully created orders."
+    },
+    "errorsCount": {
+      "type": "integer",
+      "description": "Number of orders that failed to create."
+    },
+    "createdOrders": {
+      "type": "array",
+      "description": "List of successfully created orders.",
+      "items": {
+        "type": "object",
+        "required": ["orderIdentifier", "createdOn"],
+        "properties": {
+          "orderIdentifier": {
+            "type": "integer",
+            "description": "Unique numeric identifier for the order."
+          },
+          "orderReference": {
+            "type": "string",
+            "description": "Customer-defined order reference."
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orderDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "printedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "manifestedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "shippedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trackingNumber": {
+            "type": "string",
+            "description": "Royal Mail tracking number assigned to the order."
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "packageNumber": {"type": "integer"},
+                "trackingNumber": {"type": "string"}
+              }
+            }
+          },
+          "label": {
+            "type": "string",
+            "description": "Base64-encoded PDF label, if requested."
+          },
+          "labelErrors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": {"type": "string"},
+                "code": {"type": "string"}
+              }
+            }
+          },
+          "generatedDocuments": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "List of base64-encoded generated documents."
+          }
+        }
+      }
+    },
+    "failedOrders": {
+      "type": "array",
+      "description": "List of orders that failed to create.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "object",
+            "description": "The original order request that failed."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "errorCode": {"type": "integer"},
+                "errorMessage": {"type": "string"},
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "fieldName": {"type": "string"},
+                      "value": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

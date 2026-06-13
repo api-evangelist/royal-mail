@@ -1,0 +1,120 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rm": "https://developer.royalmail.net/vocab/",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "identifier": "schema:identifier",
+    "Order": "schema:Order",
+    "ParcelDelivery": "schema:ParcelDelivery",
+    "PostalAddress": "schema:PostalAddress",
+    "Organization": "schema:Organization",
+    "Person": "schema:Person",
+    "TrackingNumber": "schema:trackingNumber",
+    "orderNumber": "schema:orderNumber",
+    "orderDate": "schema:orderDate",
+    "orderStatus": "schema:orderStatus",
+    "price": "schema:price",
+    "priceCurrency": "schema:priceCurrency",
+    "weight": "schema:weight",
+    "addressLine1": "schema:streetAddress",
+    "city": "schema:addressLocality",
+    "county": "schema:addressRegion",
+    "postcode": "schema:postalCode",
+    "countryCode": "schema:addressCountry",
+    "phoneNumber": "schema:telephone",
+    "emailAddress": "schema:email",
+    "companyName": "schema:legalName",
+    "fullName": "schema:name",
+    "serviceCode": {
+      "@id": "rm:serviceCode",
+      "@type": "xsd:string"
+    },
+    "manifestNumber": {
+      "@id": "rm:manifestNumber",
+      "@type": "xsd:integer"
+    },
+    "packageFormatIdentifier": {
+      "@id": "rm:packageFormatIdentifier",
+      "@type": "xsd:string"
+    },
+    "weightInGrams": {
+      "@id": "rm:weightInGrams",
+      "@type": "xsd:integer"
+    },
+    "isLocalCollect": {
+      "@id": "rm:isLocalCollect",
+      "@type": "xsd:boolean"
+    },
+    "requiresExportLicense": {
+      "@id": "rm:requiresExportLicense",
+      "@type": "xsd:boolean"
+    },
+    "IOSSNumber": {
+      "@id": "rm:IOSSNumber",
+      "@type": "xsd:string"
+    },
+    "customsDutyCosts": {
+      "@id": "rm:customsDutyCosts",
+      "@type": "xsd:decimal"
+    },
+    "customsDeclarationCategory": {
+      "@id": "rm:customsDeclarationCategory",
+      "@type": "xsd:string"
+    },
+    "customsCode": {
+      "@id": "rm:customsCode",
+      "@type": "xsd:string"
+    },
+    "AIRNumber": {
+      "@id": "rm:AIRNumber",
+      "@type": "xsd:string"
+    },
+    "eoriNumber": {
+      "@id": "rm:eoriNumber",
+      "@type": "xsd:string"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "https://developer.royalmail.net/",
+      "@type": "schema:WebAPI",
+      "name": "Royal Mail APIs",
+      "description": "Royal Mail provides REST APIs for shipping, tracking, label generation, barcode allocation, Click and Drop order management, Local Collect, and delivery office lookup.",
+      "url": "https://developer.royalmail.net/",
+      "schema:provider": {
+        "@type": "Organization",
+        "name": "Royal Mail Group Ltd",
+        "url": "https://www.royalmail.com/"
+      },
+      "schema:documentation": "https://developer.royalmail.net/api",
+      "schema:termsOfService": "https://developer.royalmail.net/",
+      "schema:areaServed": "GB"
+    },
+    {
+      "@id": "https://api.parcel.royalmail.com/api/v1",
+      "@type": "schema:WebAPI",
+      "name": "Royal Mail Click and Drop API",
+      "description": "REST API for Click and Drop and ChannelShipper customers to import orders, retrieve order details, generate shipping labels, manifest eligible orders, and create return shipments.",
+      "url": "https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338",
+      "schema:documentation": "https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml"
+    },
+    {
+      "@id": "https://api.royalmail.net/shipping/v2",
+      "@type": "schema:WebAPI",
+      "name": "Royal Mail Shipping V2 API",
+      "description": "RESTful service enabling account customers to create domestic and international shipments, produce labels, print customs documents, manifest shipments, and request barcode ranges.",
+      "url": "https://developer.royalmail.net/taxonomy/term/91"
+    },
+    {
+      "@id": "https://api.royalmail.net/tracking",
+      "@type": "schema:WebAPI",
+      "name": "Royal Mail Tracking V2 API",
+      "description": "Allows account customers to receive track-and-trace information for mail items, including status, delivery history, and proof of delivery.",
+      "url": "https://developer.royalmail.net/product/175625/api/76888"
+    }
+  ]
+}

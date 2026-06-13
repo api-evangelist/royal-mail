@@ -1,0 +1,216 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/royal-mail/main/json-schema/create-order-request.json",
+  "title": "CreateOrderRequest",
+  "description": "Request schema for creating an order via the Royal Mail Click and Drop API.",
+  "type": "object",
+  "required": ["recipient", "orderDate", "subtotal", "shippingCostCharged", "total"],
+  "properties": {
+    "orderReference": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Customer-defined order reference."
+    },
+    "isRecipientABusiness": {
+      "type": "boolean",
+      "description": "Indicates if the recipient is a business."
+    },
+    "recipient": {
+      "type": "object",
+      "description": "Recipient address and contact details.",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/AddressRequest"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "maxLength": 25
+        },
+        "emailAddress": {
+          "type": "string",
+          "maxLength": 254
+        },
+        "addressBookReference": {
+          "type": "string",
+          "maxLength": 100
+        }
+      }
+    },
+    "sender": {
+      "type": "object",
+      "description": "Sender details.",
+      "properties": {
+        "tradingName": {"type": "string", "maxLength": 250},
+        "phoneNumber": {"type": "string", "maxLength": 25},
+        "emailAddress": {"type": "string", "maxLength": 254}
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/ShipmentPackageRequest"}
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "plannedDespatchDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "specialInstructions": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "subtotal": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 999999,
+      "description": "Total value of all goods, excluding tax."
+    },
+    "shippingCostCharged": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 999999,
+      "description": "Shipping costs charged to the customer."
+    },
+    "otherCosts": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 999999
+    },
+    "customsDutyCosts": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 99999.99,
+      "description": "Customs duty costs, only for DDP services."
+    },
+    "total": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 999999,
+      "description": "Sum of subtotal, tax and retail shipping costs."
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 3
+    },
+    "postageDetails": {
+      "$ref": "#/definitions/PostageDetailsRequest"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {"type": "string", "maxLength": 100},
+          "value": {"type": "string", "maxLength": 100}
+        }
+      }
+    },
+    "orderTax": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 999999
+    },
+    "containsDangerousGoods": {
+      "type": "boolean"
+    },
+    "dangerousGoodsUnCode": {
+      "type": "string",
+      "maxLength": 4
+    }
+  },
+  "definitions": {
+    "AddressRequest": {
+      "type": "object",
+      "required": ["addressLine1", "city", "countryCode"],
+      "properties": {
+        "fullName": {"type": "string", "maxLength": 210},
+        "companyName": {"type": "string", "maxLength": 100},
+        "addressLine1": {"type": "string", "maxLength": 100},
+        "addressLine2": {"type": "string", "maxLength": 100},
+        "addressLine3": {"type": "string", "maxLength": 100},
+        "city": {"type": "string", "maxLength": 100},
+        "county": {"type": "string", "maxLength": 100},
+        "postcode": {"type": "string", "maxLength": 20},
+        "countryCode": {"type": "string", "maxLength": 3}
+      }
+    },
+    "ShipmentPackageRequest": {
+      "type": "object",
+      "required": ["weightInGrams", "packageFormatIdentifier"],
+      "properties": {
+        "weightInGrams": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30000
+        },
+        "packageFormatIdentifier": {
+          "type": "string",
+          "description": "Enum: undefined, letter, largeLetter, smallParcel, mediumParcel, largeParcel, parcel, documents"
+        },
+        "dimensions": {
+          "type": "object",
+          "required": ["heightInMms", "widthInMms", "depthInMms"],
+          "properties": {
+            "heightInMms": {"type": "integer"},
+            "widthInMms": {"type": "integer"},
+            "depthInMms": {"type": "integer"}
+          }
+        },
+        "contents": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/ProductItemRequest"}
+        }
+      }
+    },
+    "PostageDetailsRequest": {
+      "type": "object",
+      "properties": {
+        "sendNotificationsTo": {
+          "type": "string",
+          "enum": ["sender", "recipient", "billing"]
+        },
+        "serviceCode": {"type": "string", "maxLength": 10},
+        "carrierName": {"type": "string", "maxLength": 50},
+        "serviceRegisterCode": {"type": "string", "maxLength": 2},
+        "consequentialLoss": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "receiveEmailNotification": {"type": "boolean"},
+        "receiveSmsNotification": {"type": "boolean"},
+        "requestSignatureUponDelivery": {"type": "boolean"},
+        "isLocalCollect": {"type": "boolean"},
+        "safePlace": {"type": "string", "maxLength": 90},
+        "department": {"type": "string", "maxLength": 150},
+        "IOSSNumber": {"type": "string", "maxLength": 50},
+        "requiresExportLicense": {"type": "boolean"},
+        "commercialInvoiceNumber": {"type": "string", "maxLength": 35},
+        "commercialInvoiceDate": {"type": "string", "format": "date-time"},
+        "recipientEoriNumber": {"type": "string"}
+      }
+    },
+    "ProductItemRequest": {
+      "type": "object",
+      "required": ["quantity"],
+      "properties": {
+        "name": {"type": "string", "maxLength": 800},
+        "SKU": {"type": "string", "maxLength": 100},
+        "quantity": {"type": "integer", "minimum": 1, "maximum": 999999},
+        "unitValue": {"type": "number", "minimum": 0, "maximum": 999999},
+        "unitWeightInGrams": {"type": "integer", "minimum": 0, "maximum": 999999},
+        "customsDescription": {"type": "string", "maxLength": 50},
+        "extendedCustomsDescription": {"type": "string", "maxLength": 300},
+        "customsCode": {"type": "string", "maxLength": 10},
+        "originCountryCode": {"type": "string", "maxLength": 3},
+        "customsDeclarationCategory": {
+          "type": "string",
+          "enum": ["none", "gift", "commercialSample", "documents", "other", "returnedGoods", "commercialSaleOfGoods", "eCommerceSaleOfGoods"]
+        },
+        "requiresExportLicence": {"type": "boolean"}
+      }
+    }
+  }
+}

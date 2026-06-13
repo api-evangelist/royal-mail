@@ -1,0 +1,40 @@
+{
+  "summary": "Create a return shipment",
+  "description": "Example request and response for creating a Royal Mail tracked return label.",
+  "request": {
+    "service": {
+      "serviceCode": "TSN",
+      "serviceRegisterCode": ""
+    },
+    "shipment": {
+      "shippingAddress": {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "addressLine1": "10 Downing Street",
+        "city": "London",
+        "postcode": "SW1A 2AA",
+        "country": "United Kingdom",
+        "countryIsoCode": "GB"
+      },
+      "returnAddress": {
+        "companyName": "Example Shop Ltd",
+        "addressLine1": "1 Warehouse Road",
+        "city": "Manchester",
+        "postcode": "M1 1AE",
+        "country": "United Kingdom",
+        "countryIsoCode": "GB"
+      },
+      "customerReference": {
+        "reference": "RETURN-ORD-2026-001"
+      }
+    }
+  },
+  "response": {
+    "shipment": {
+      "trackingNumber": "TR123456789GB",
+      "uniqueItemId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    "qrCode": "iVBORw0KGgoAAAANSUhEUgAAAMgAAADI...",
+    "label": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZw..."
+  }
+}

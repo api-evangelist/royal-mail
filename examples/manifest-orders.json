@@ -1,0 +1,15 @@
+{
+  "summary": "Manifest eligible orders",
+  "description": "Example request and response for manifesting all eligible Royal Mail orders.",
+  "request": {
+    "carrierName": "Royal Mail OBA"
+  },
+  "response_201": {
+    "manifestNumber": 1001,
+    "documentPdf": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZw..."
+  },
+  "response_202": {
+    "manifestNumber": 1002,
+    "documentPdf": null
+  }
+}
