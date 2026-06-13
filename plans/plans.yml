@@ -1,0 +1,35 @@
+plans:
+
+  - name: Free (No Usage Cost)
+    description: Several Royal Mail APIs are available at no usage cost to customers, including the Barcode Allocation V1, Local Collect V3, and Delivery Office Finder V1 APIs. Customers are responsible for their own development costs. Access is granted via the Developer Portal after registration.
+    url: https://developer.royalmail.net/product
+    apis:
+      - Royal Mail Barcode Allocation V1 (REST)
+      - Royal Mail Local Collect V3 (REST)
+      - Royal Mail Delivery Office Finder V1 (REST)
+
+  - name: Standard (Tracking - Low Usage)
+    description: The Royal Mail Tracking V2 API for server-side applications has a low usage rate limit plan applicable during onboarding. Access requires an account and subscription approval through the Developer Portal.
+    url: https://developer.royalmail.net/product/175625/api/76888
+    apis:
+      - Royal Mail Tracking V2 (REST)
+    rateLimits:
+      - description: Low usage limit applicable — exact quota configurable per plan in the Developer Portal.
+
+  - name: OBA Business Account (Shipping)
+    description: Full access to the Royal Mail API Shipping V2 (REST) requires an Online Business Account (OBA) processing up to 25,000 shipments per year. Plans are configurable with per-API rate limits visible in the Developer Portal Apps dashboard. Some plans require approval from Royal Mail, which typically takes less than one week.
+    url: https://developer.royalmail.net/product
+    requiresApproval: true
+    apis:
+      - Royal Mail API Shipping V2 (REST)
+    rateLimits:
+      - description: Per-plan rate limits configurable; usage tracked via Product Subscriptions table in Developer Portal.
+
+  - name: Click & Drop / ChannelShipper
+    description: Access to the Click & Drop API requires a Royal Mail Click & Drop or ChannelShipper account. API key authentication is used. Supports up to 2,000 orders per single request.
+    url: https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API
+    requiresApproval: false
+    apis:
+      - Royal Mail Click & Drop API
+    rateLimits:
+      - description: Maximum 5 API calls per second; exceeding this limit returns HTTP 429.

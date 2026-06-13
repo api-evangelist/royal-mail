@@ -1,0 +1,31 @@
+finops:
+
+  summary: Royal Mail API usage costs vary by API. Several foundational APIs (Barcode Allocation V1, Local Collect V3, Delivery Office Finder V1) carry no API usage charges to customers; development costs remain the customer's responsibility. The core Shipping V2 REST API and Tracking V2 APIs require an Online Business Account (OBA) and are accessed through subscription plans on the Developer Portal. Click & Drop API access is tied to a Click & Drop or ChannelShipper account.
+
+  models:
+
+    - name: No Usage Cost
+      description: APIs in this category impose no per-call or subscription fee. Customers bear their own development and integration costs.
+      applies_to:
+        - Royal Mail Barcode Allocation V1 (REST)
+        - Royal Mail Local Collect V3 (REST)
+        - Royal Mail Delivery Office Finder V1 (REST)
+      source: https://developer.royalmail.net/product
+
+    - name: OBA-Based Access
+      description: The Shipping V2 REST API and Tracking V2 API require an Online Business Account. Pricing details are negotiated with Royal Mail and tied to account volume. Businesses typically need to process up to 25,000 shipments per year to qualify for OBA API access. Plan-based rate limits apply.
+      applies_to:
+        - Royal Mail API Shipping V2 (REST)
+        - Royal Mail Tracking V2 (REST)
+      source: https://developer.royalmail.net/product
+
+    - name: Click & Drop Account
+      description: Click & Drop API access is included with a Click & Drop or ChannelShipper business account. No separate per-call API fee; postage costs are per shipment as normal.
+      applies_to:
+        - Royal Mail Click & Drop API
+      source: https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API
+
+  notes:
+    - Royal Mail does not publish public pricing tiers for the Shipping V2 or Tracking APIs on the Developer Portal; developers must register and contact Royal Mail to obtain plan details.
+    - The Developer Portal displays per-plan usage vs rate limits in the Apps dashboard once subscribed.
+    - Some plans require explicit approval from Royal Mail (typically less than one week turnaround).

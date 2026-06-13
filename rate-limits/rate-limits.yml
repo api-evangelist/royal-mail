@@ -1,0 +1,27 @@
+rateLimits:
+
+  - api: Royal Mail Click & Drop API
+    url: https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API
+    limits:
+      - period: per second
+        requests: 5
+        notes: Exceeding 5 calls per second returns HTTP 429 Too Many Requests.
+      - period: per request
+        orders: 2000
+        notes: A single POST /orders request may include up to 2,000 orders; larger batches may take longer to process.
+
+  - api: Royal Mail Tracking V2 (REST)
+    url: https://developer.royalmail.net/product/175625/api/76888
+    limits:
+      - description: Low usage limit applicable during onboarding tier. Exact thresholds are configurable in the Developer Portal and visible in the Product Subscriptions table within the Apps dashboard.
+
+  - api: Royal Mail API Shipping V2 (REST)
+    url: https://developer.royalmail.net/taxonomy/term/91
+    limits:
+      - description: Plans may have a common rate limit across all resources or individual rate limits per resource. Limits are set per plan and visible in the Developer Portal Apps dashboard under the Product Subscriptions table.
+
+  - api: General (All Portal APIs)
+    url: https://developer.royalmail.net/help
+    limits:
+      - description: Rate limits specify how many requests an application is allowed to make during a specified time interval. Plans are assigned at subscription time and usage can be monitored in the Developer Portal. Applications are issued a unique API Key and Secret used to authenticate requests.
+      - description: Authentication tokens for the Shipping V2 REST API are JWT-based with a 4-hour validity window obtained via POST to /shipping/v2/token using client_id, client_secret, username, and password.
