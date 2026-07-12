@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/click-and-drop-api-v1.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then
+    your token.
+  sources:
+  - openapi/click-and-drop-api-v1.yml

@@ -152,6 +152,10 @@ apis:
 
 common:
 
+  - type: DomainSecurity
+    url: security/royal-mail-domain-security.yml
+  - type: Authentication
+    url: authentication/royal-mail-authentication.yml
   - type: Portal
     url: https://developer.royalmail.net/
 
