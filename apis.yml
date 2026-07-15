@@ -152,6 +152,8 @@ apis:
 
 common:
 
+  - type: AgenticAccess
+    url: agentic-access/royal-mail-agentic-access.yml
   - type: DomainSecurity
     url: security/royal-mail-domain-security.yml
   - type: Authentication
