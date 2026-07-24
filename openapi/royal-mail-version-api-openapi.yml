@@ -1,0 +1,60 @@
+swagger: '2.0'
+info:
+  title: ChannelShipper & Royal Mail Public Labels Version API
+  description: Import your orders, retrieve your orders and generate labels.
+  version: 1.0.0
+basePath: /api/v1
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: Version
+paths:
+  /version:
+    get:
+      tags:
+      - Version
+      summary: Get API version details.
+      operationId: GetVersionAsync
+      responses:
+        '200':
+          description: Returns details about the API version
+          schema:
+            $ref: '#/definitions/GetVersionResource'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  GetVersionResource:
+    required:
+    - releaseDate
+    type: object
+    properties:
+      commit:
+        type: string
+      build:
+        type: string
+      release:
+        type: string
+      releaseDate:
+        type: string
+        format: date-time
+  ErrorResponse:
+    required:
+    - message
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      details:
+        type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then your token.
+    name: Authorization
+    in: header

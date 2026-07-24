@@ -1,0 +1,117 @@
+swagger: '2.0'
+info:
+  title: ChannelShipper & Royal Mail Public Labels API
+  description: Import your orders, retrieve your orders and generate labels.
+  version: 1.0.0
+basePath: /api/v1
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: Labels
+paths:
+  /orders/{orderIdentifiers}/label:
+    get:
+      tags:
+      - Labels
+      summary: Return a single PDF file with generated label and/or associated document(s)
+      description: 'Reserved for OBA customers only.
+
+
+        The account "Label format" settings page will control the page format settings used to print the postage label
+
+        and associated documents.
+
+        '
+      operationId: GetOrdersLabelAsync
+      parameters:
+      - $ref: '#/parameters/orderIdentifiers'
+      - $ref: '#/parameters/documentType'
+      - $ref: '#/parameters/includeReturnsLabel'
+      - $ref: '#/parameters/includeCN'
+      produces:
+      - application/pdf
+      - application/json
+      responses:
+        '200':
+          description: Return the PDF file with labels
+          schema:
+            type: file
+        '400':
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden (Feature available for OBA accounts only)
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      security:
+      - Bearer: []
+definitions:
+  OrderErrorResponse:
+    type: object
+    properties:
+      accountOrderNumber:
+        type: integer
+      channelOrderReference:
+        type: string
+      code:
+        type: string
+      message:
+        type: string
+  ErrorResponse:
+    required:
+    - message
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      details:
+        type: string
+parameters:
+  orderIdentifiers:
+    in: path
+    name: orderIdentifiers
+    required: true
+    type: string
+    description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
+  documentType:
+    in: query
+    name: documentType
+    required: true
+    type: string
+    enum:
+    - postageLabel
+    - despatchNote
+    - CN22
+    - CN23
+    description: Document generation mode.
+  includeReturnsLabel:
+    in: query
+    name: includeReturnsLabel
+    required: false
+    type: boolean
+    description: Include returns label. Required when documentType is set to 'postageLabel'.
+  includeCN:
+    in: query
+    name: includeCN
+    required: false
+    type: boolean
+    description: Include CN22/CN23 with label.
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then your token.
+    name: Authorization
+    in: header
