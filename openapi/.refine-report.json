@@ -1,0 +1,22 @@
+{
+  "provider": "royal-mail",
+  "sources": [
+    "royal-mail-labels-api-openapi.yml",
+    "royal-mail-manifests-api-openapi.yml",
+    "royal-mail-orders-api-openapi.yml",
+    "royal-mail-returns-api-openapi.yml",
+    "royal-mail-version-api-openapi.yml"
+  ],
+  "outputs": [
+    "royal-mail-labels-api-openapi.yml",
+    "royal-mail-manifests-api-openapi.yml",
+    "royal-mail-orders-api-openapi.yml",
+    "royal-mail-returns-api-openapi.yml",
+    "royal-mail-version-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
