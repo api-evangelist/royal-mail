@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChannelShipper & Royal Mail Public Labels Returns API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Returns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available return services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/returns/services"
+          },
+          "docs": "Returns a list of return services that can be used when creating return shipments."
+        },
+        {
+          "info": {
+            "name": "Create a return shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/returns"
+          },
+          "docs": "Creates a return label and returns shipment details including tracking number, QR code, and label."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

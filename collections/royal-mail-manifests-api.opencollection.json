@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChannelShipper & Royal Mail Public Labels Manifests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manifests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Manifest eligible orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/manifests"
+          },
+          "docs": "Manifest all orders in 'Label Generated' and 'Despatched' statuses and return manifest paperwork where possible.\n"
+        },
+        {
+          "info": {
+            "name": "Retry manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/manifests/retry/:manifestIdentifier",
+            "params": [
+              {
+                "name": "manifestIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The manifest number returned from the initial manifest eligible orders endpoint call"
+              }
+            ]
+          },
+          "docs": "Retry a manifest operation if the eligible orders were not able to be successfully processed."
+        },
+        {
+          "info": {
+            "name": "Get manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/manifests/:manifestIdentifier",
+            "params": [
+              {
+                "name": "manifestIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "The manifest number returned from the initial manifest eligible orders endpoint call"
+              }
+            ]
+          },
+          "docs": "Retrieve manifest paperwork for a previously successful manifest eligible orders call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,496 @@
+{
+  "item": [
+    {
+      "id": "23985fe5-b044-402d-b43e-0c7d431be45e",
+      "name": "Labels",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "31be61ac-4c06-4eea-a8f6-5609ca9b4ebe",
+          "name": "Return a single PDF file with generated label and/or associated document(s)",
+          "request": {
+            "name": "Return a single PDF file with generated label and/or associated document(s)",
+            "description": {
+              "content": "Reserved for OBA customers only.\n\nThe account \"Label format\" settings page will control the page format settings used to print the postage label\nand associated documents.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderIdentifiers",
+                "label"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "documentType",
+                  "value": "<string>",
+                  "description": "(Required) Document generation mode."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeReturnsLabel",
+                  "value": "<boolean>",
+                  "description": "Include returns label. Required when documentType is set to 'postageLabel'."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCN",
+                  "value": "<boolean>",
+                  "description": "Include CN22/CN23 with label."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderIdentifiers",
+                  "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "229913d5-04c2-44a0-8d57-8ddd5f043b9f",
+              "name": "Return the PDF file with labels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderIdentifiers",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeReturnsLabel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCN",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderIdentifiers",
+                      "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55408c7e-7818-4097-8813-ce5d6e2613ac",
+              "name": "Bad Request (Request has missing or invalid parameters and cannot be parsed)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderIdentifiers",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeReturnsLabel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCN",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderIdentifiers",
+                      "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountOrderNumber\": 4887,\n    \"channelOrderReference\": \"string\",\n    \"code\": \"string\",\n    \"message\": \"string\"\n  },\n  {\n    \"accountOrderNumber\": 8312,\n    \"channelOrderReference\": \"string\",\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "effb2885-e903-4594-827c-561cfe77f455",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderIdentifiers",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeReturnsLabel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCN",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderIdentifiers",
+                      "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88a3e4c9-6cd7-41cc-8eda-5b82fbb71d0d",
+              "name": "Forbidden (Feature available for OBA accounts only)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderIdentifiers",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeReturnsLabel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCN",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderIdentifiers",
+                      "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b657c44-67f7-45c2-b901-bfcc50f2c581",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderIdentifiers",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeReturnsLabel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCN",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderIdentifiers",
+                      "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15018b87-094b-4f4e-a39d-98d756541ef9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderIdentifiers",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeReturnsLabel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCN",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderIdentifiers",
+                      "description": "(Required) One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2a2034c0-fb9c-4754-8f32-c487500b62d5",
+    "name": "ChannelShipper & Royal Mail Public Labels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Import your orders, retrieve your orders and generate labels.",
+      "type": "text/plain"
+    }
+  }
+}

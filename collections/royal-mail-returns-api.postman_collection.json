@@ -1,0 +1,464 @@
+{
+  "item": [
+    {
+      "id": "a48a3692-4ec9-416c-9770-6c9e8a37eb4d",
+      "name": "Returns",
+      "description": {
+        "content": "Reserved for OBA customers only.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9ef0b72-0915-4cbd-8aa3-af8f09e19e79",
+          "name": "List available return services",
+          "request": {
+            "name": "List available return services",
+            "description": {
+              "content": "Returns a list of return services that can be used when creating return shipments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77ff4750-b53b-481f-9c4d-1fcdce6db514",
+              "name": "Lists all available return services for generating return labels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": [\n    {\n      \"carrierGuid\": \"d951f4d4-2deb-b57d-e526-8fe53e88dd89\",\n      \"carrierServiceGuid\": \"68858570-2a09-6255-aa49-c21c971e0f82\",\n      \"serviceName\": \"string\",\n      \"serviceCode\": \"string\"\n    },\n    {\n      \"carrierGuid\": \"d19a5412-a578-5809-609a-708cc1cf3134\",\n      \"carrierServiceGuid\": \"08401950-99f2-c796-49a1-e404ef1d8d26\",\n      \"serviceName\": \"string\",\n      \"serviceCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb853964-455f-4eff-8cd6-e019cc19859d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cfacb3eb-ad32-4243-b213-b5018f1c7a51",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "681f499b-d8cf-4382-8f37-d9e5b48acb33",
+          "name": "Create a return shipment",
+          "request": {
+            "name": "Create a return shipment",
+            "description": {
+              "content": "Creates a return label and returns shipment details including tracking number, QR code, and label.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service\": {\n    \"serviceCode\": \"<string>\",\n    \"serviceRegisterCode\": \"<string>\"\n  },\n  \"shipment\": {\n    \"shippingAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"returnAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"customerReference\": {\n      \"reference\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47b927f4-352d-44f0-b004-24bea5db5b1c",
+              "name": "Successfully created return shipment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": {\n    \"serviceCode\": \"<string>\",\n    \"serviceRegisterCode\": \"<string>\"\n  },\n  \"shipment\": {\n    \"shippingAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"returnAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"customerReference\": {\n      \"reference\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipment\": {\n    \"trackingNumber\": \"string\",\n    \"uniqueItemId\": \"string\"\n  },\n  \"qrCode\": \"string\",\n  \"label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d58b5c2a-8648-4d0f-b10f-9aa34560340a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": {\n    \"serviceCode\": \"<string>\",\n    \"serviceRegisterCode\": \"<string>\"\n  },\n  \"shipment\": {\n    \"shippingAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"returnAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"customerReference\": {\n      \"reference\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02a45505-cae5-4e5b-b62d-b29648b70b41",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": {\n    \"serviceCode\": \"<string>\",\n    \"serviceRegisterCode\": \"<string>\"\n  },\n  \"shipment\": {\n    \"shippingAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"returnAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"customerReference\": {\n      \"reference\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bef8338-a43f-4645-b18b-f0190de4075f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": {\n    \"serviceCode\": \"<string>\",\n    \"serviceRegisterCode\": \"<string>\"\n  },\n  \"shipment\": {\n    \"shippingAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"returnAddress\": {\n      \"title\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryIsoCode\": \"<string>\"\n    },\n    \"customerReference\": {\n      \"reference\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1ef3ee43-6dd0-4324-ab5a-45d80b3ef407",
+    "name": "ChannelShipper & Royal Mail Public Labels Returns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Import your orders, retrieve your orders and generate labels.",
+      "type": "text/plain"
+    }
+  }
+}

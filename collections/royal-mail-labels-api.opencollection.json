@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChannelShipper & Royal Mail Public Labels API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a single PDF file with generated label and/or associated document(s)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/:orderIdentifiers/label",
+            "params": [
+              {
+                "name": "orderIdentifiers",
+                "value": "",
+                "type": "path",
+                "description": "One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "query",
+                "description": "Document generation mode."
+              },
+              {
+                "name": "includeReturnsLabel",
+                "value": "",
+                "type": "query",
+                "description": "Include returns label. Required when documentType is set to 'postageLabel'."
+              },
+              {
+                "name": "includeCN",
+                "value": "",
+                "type": "query",
+                "description": "Include CN22/CN23 with label."
+              }
+            ]
+          },
+          "docs": "Reserved for OBA customers only.\n\nThe account \"Label format\" settings page will control the page format settings used to print the postage label\nand associated documents.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

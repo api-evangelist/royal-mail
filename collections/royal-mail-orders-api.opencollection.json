@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChannelShipper & Royal Mail Public Labels Orders API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve specific orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/:orderIdentifiers",
+            "params": [
+              {
+                "name": "orderIdentifiers",
+                "value": "",
+                "type": "path",
+                "description": "One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+              }
+            ]
+          },
+          "docs": "Retrieve specific orders"
+        },
+        {
+          "info": {
+            "name": "Delete orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/orders/:orderIdentifiers",
+            "params": [
+              {
+                "name": "orderIdentifiers",
+                "value": "",
+                "type": "path",
+                "description": "One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+              }
+            ]
+          },
+          "docs": "Please be aware labels generated on orders which are deleted are no longer valid and must be destroyed.\n\nCancelled label information is automatically shared with Royal Mail Revenue Protection, and should\na cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account\nand an additional handling fee applied.\n"
+        },
+        {
+          "info": {
+            "name": "Set order status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/orders/status"
+          },
+          "docs": "Set order status"
+        },
+        {
+          "info": {
+            "name": "Retrieve details of the specific orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/:orderIdentifiers/full",
+            "params": [
+              {
+                "name": "orderIdentifiers",
+                "value": "",
+                "type": "path",
+                "description": "One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100."
+              }
+            ]
+          },
+          "docs": "Reserved for ChannelShipper customers only."
+        },
+        {
+          "info": {
+            "name": "Retrieve pageable list of orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return"
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date and time lower bound for items filtering"
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date and time upper bound for items filtering"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "The token for retrieving the next page of items"
+              }
+            ]
+          },
+          "docs": "Retrieve pageable list of orders"
+        },
+        {
+          "info": {
+            "name": "Create orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orders"
+          },
+          "docs": "Create orders"
+        },
+        {
+          "info": {
+            "name": "Retrieve pageable list of orders with details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/full",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return"
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date and time lower bound for items filtering"
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date and time upper bound for items filtering"
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "The token for retrieving the next page of items"
+              }
+            ]
+          },
+          "docs": "Reserved for ChannelShipper customers only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
