@@ -178,6 +178,8 @@ apis:
   humanURL: https://developer.royalmail.net/taxonomy/term/91
   baseURL: https://api.royalmail.net/shipping/v2
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
