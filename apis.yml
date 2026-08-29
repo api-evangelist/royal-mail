@@ -1,5 +1,17 @@
 name: Royal Mail
 description: Royal Mail provides a suite of REST APIs for businesses to integrate shipping, tracking, label generation, barcode allocation, and Click & Drop order management directly into their fulfilment systems. APIs cover domestic and international shipment creation, label printing, manifest submission, pre-allocated tracking numbers, offline barcode ranges, local collect options, and delivery office lookup.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
