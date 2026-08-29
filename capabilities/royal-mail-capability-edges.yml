@@ -1,0 +1,25 @@
+slug: royal-mail
+provider: Royal Mail
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Manifests
+  spec_file: royal-mail-manifests-api-openapi.yml
+  capability_id: BC-2500.40
+  capability_id_l1: BC-2500
+  capability_name: Manifest and Cargo Declaration Management
+  confidence: 0.75
+  evidence: POST /manifests  ManifestEligibleAsync  Manifest eligible orders; GET /manifests/{manifestIdentifier}  Get
+    manifest
+  reason: Operations create, retry and retrieve carrier manifests for shipments, matching manifest and
+    cargo declaration management.

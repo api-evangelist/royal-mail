@@ -223,6 +223,9 @@ apis:
   - type: Documentation
     url: https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml
 common:
+  - type: CapabilityMap
+    url: capabilities/royal-mail-capability-edges.yml
+    name: Royal Mail Business Capability Map
 
   - type: AgenticAccess
     url: agentic-access/royal-mail-agentic-access.yml
