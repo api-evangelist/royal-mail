@@ -1,5 +1,8 @@
 name: Royal Mail
-description: Royal Mail provides a suite of REST APIs for businesses to integrate shipping, tracking, label generation, barcode allocation, and Click & Drop order management directly into their fulfilment systems. APIs cover domestic and international shipment creation, label printing, manifest submission, pre-allocated tracking numbers, offline barcode ranges, local collect options, and delivery office lookup.
+description: Royal Mail provides a suite of REST APIs for businesses to integrate shipping, tracking,
+  label generation, barcode allocation, and Click & Drop order management directly into their fulfilment
+  systems. APIs cover domestic and international shipment creation, label printing, manifest submission,
+  pre-allocated tracking numbers, offline barcode ranges, local collect options, and delivery office lookup.
 deliveryModel:
   model: saas
   open_source: false
@@ -28,27 +31,24 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/royal-mail.png
 url: https://raw.githubusercontent.com/api-evangelist/royal-mail/refs/heads/main/apis.yml
-version: "0.19"
-created: "2026-06-13"
-modified: "2026-06-13"
+version: '0.19'
+created: '2026-06-13'
+modified: '2026-09-16'
 specificationVersion: '0.23'
-
 tags:
-  - Shipping
-  - Postal Services
-  - Labels
-  - Tracking
-  - Logistics
-  - Barcodes
-  - Click and Drop
-  - UK
-
+- Shipping
+- Postal Services
+- Labels
+- Tracking
+- Logistics
+- Barcodes
+- Click and Drop
+- UK
 apis:
 - name: Royal Mail API Shipping V2 (REST)
-  description: >-
-    A fully RESTful service enabling account customers to create domestic and international shipments,
-    produce shipping labels, print customs documents, manifest shipments, pre-allocate tracking numbers,
-    and request offline barcode ranges. Requires an Online Business Account (OBA).
+  description: A fully RESTful service enabling account customers to create domestic and international
+    shipments, produce shipping labels, print customs documents, manifest shipments, pre-allocate tracking
+    numbers, and request offline barcode ranges. Requires an Online Business Account (OBA).
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.royalmail.net/taxonomy/term/91
   baseURL: https://api.royalmail.net/shipping/v2
@@ -70,10 +70,9 @@ apis:
   overlays: []
   aid: royal-mail:royal-mail-api-shipping-v2-rest
 - name: Royal Mail Tracking V2 (REST)
-  description: >-
-    Allows account customers to receive track-and-trace information for mail items, including current
-    status, delivery history, and proof of delivery for single or multiple items. Intended for server-side
-    application use.
+  description: Allows account customers to receive track-and-trace information for mail items, including
+    current status, delivery history, and proof of delivery for single or multiple items. Intended for
+    server-side application use.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.royalmail.net/product/175625/api/76888
   baseURL: https://api.royalmail.net
@@ -93,10 +92,9 @@ apis:
   overlays: []
   aid: royal-mail:royal-mail-tracking-v2-rest
 - name: Royal Mail Barcode Allocation V1 (REST)
-  description: >-
-    A RESTful web service that enables API consumers to request a pre-allocated range of Royal Mail barcodes
-    for offline use in shipping processes. No usage costs to customers; development costs are covered
-    by the customer.
+  description: A RESTful web service that enables API consumers to request a pre-allocated range of Royal
+    Mail barcodes for offline use in shipping processes. No usage costs to customers; development costs
+    are covered by the customer.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.royalmail.net/taxonomy/term/61
   baseURL: https://api.royalmail.net
@@ -116,10 +114,9 @@ apis:
   overlays: []
   aid: royal-mail:royal-mail-barcode-allocation-v1-rest
 - name: Royal Mail Local Collect V3 (REST)
-  description: >-
-    Enables customers to benefit from Click and Collect delivery options by retrieving current lists of
-    participating Post Offices and Royal Mail Customer Service Points where tracked and special delivery
-    parcels can be collected. No usage costs to customers.
+  description: Enables customers to benefit from Click and Collect delivery options by retrieving current
+    lists of participating Post Offices and Royal Mail Customer Service Points where tracked and special
+    delivery parcels can be collected. No usage costs to customers.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.royalmail.net/product
   baseURL: https://api.royalmail.net
@@ -140,9 +137,8 @@ apis:
   overlays: []
   aid: royal-mail:royal-mail-local-collect-v3-rest
 - name: Royal Mail Delivery Office Finder V1 (REST)
-  description: >-
-    Enables Royal Mail customers to obtain details of the delivery office dedicated to a provided postcode,
-    including location name, address, available facilities, and opening hours.
+  description: Enables Royal Mail customers to obtain details of the delivery office dedicated to a provided
+    postcode, including location name, address, available facilities, and opening hours.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.royalmail.net/product
   baseURL: https://api.royalmail.net
@@ -224,43 +220,35 @@ apis:
   - type: Documentation
     url: https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml
 common:
-  - type: CapabilityMap
-    url: capabilities/royal-mail-capability-edges.yml
-    name: Royal Mail Business Capability Map
-
-  - type: AgenticAccess
-    url: agentic-access/royal-mail-agentic-access.yml
-  - type: DomainSecurity
-    url: security/royal-mail-domain-security.yml
-  - type: Authentication
-    url: authentication/royal-mail-authentication.yml
-  - type: Portal
-    url: https://developer.royalmail.net/
-
-  - type: Documentation
-    url: https://developer.royalmail.net/api
-
-  - type: GettingStarted
-    url: https://developer.royalmail.net/start
-
-  - type: Support
-    url: https://developer.royalmail.net/help
-
-  - type: Plans
-    url: https://developer.royalmail.net/product
-
-  - type: RateLimits
-    url: https://developer.royalmail.net/help
-
-  - type: TermsOfService
-    url: https://developer.royalmail.net/
-
-  - type: Authentication
-    url: https://developer.royalmail.net/start
-
-  - type: Contact
-    url: https://developer.royalmail.net/help
-
+- type: Website
+  url: https://royalmail.net
+- type: CapabilityMap
+  url: capabilities/royal-mail-capability-edges.yml
+  name: Royal Mail Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/royal-mail-agentic-access.yml
+- type: DomainSecurity
+  url: security/royal-mail-domain-security.yml
+- type: Authentication
+  url: authentication/royal-mail-authentication.yml
+- type: Portal
+  url: https://developer.royalmail.net/
+- type: Documentation
+  url: https://developer.royalmail.net/api
+- type: GettingStarted
+  url: https://developer.royalmail.net/start
+- type: Support
+  url: https://developer.royalmail.net/help
+- type: Plans
+  url: https://developer.royalmail.net/product
+- type: RateLimits
+  url: https://developer.royalmail.net/help
+- type: TermsOfService
+  url: https://developer.royalmail.net/
+- type: Authentication
+  url: https://developer.royalmail.net/start
+- type: Contact
+  url: https://developer.royalmail.net/help
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
