@@ -43,6 +43,15 @@ tags:
 - Logistics
 - Barcodes
 - Click and Drop
+- United Kingdom
+tags_raw:
+- Shipping
+- Postal Services
+- Labels
+- Tracking
+- Logistics
+- Barcodes
+- Click and Drop
 - UK
 apis:
 - name: Royal Mail API Shipping V2 (REST)
@@ -124,6 +133,11 @@ apis:
   - Local Collect
   - Click and Collect
   - Post Office
+  - Location
+  tags_raw:
+  - Local Collect
+  - Click and Collect
+  - Post Office
   - Locations
   properties:
   - type: Documentation
@@ -143,6 +157,10 @@ apis:
   humanURL: https://developer.royalmail.net/product
   baseURL: https://api.royalmail.net
   tags:
+  - Delivery Office
+  - Location
+  - Postcode
+  tags_raw:
   - Delivery Office
   - Locations
   - Postcode
