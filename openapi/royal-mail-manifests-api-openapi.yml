@@ -1,13 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: ChannelShipper & Royal Mail Public Labels Manifests API
+  title: ChannelShipper & Royal Mail Public Manifests API
   description: Import your orders, retrieve your orders and generate labels.
   version: 1.0.0
-basePath: /api/v1
-consumes:
-- application/json
-produces:
-- application/json
+servers:
+- url: /api/v1
 tags:
 - name: Manifests
 paths:
@@ -16,29 +13,27 @@ paths:
       tags:
       - Manifests
       summary: Manifest eligible orders
-      description: 'Manifest all orders in ''Label Generated'' and ''Despatched'' statuses and return manifest paperwork where possible.
-
-        '
+      description: Manifest all orders in 'Label Generated' and 'Despatched' statuses and return manifest paperwork where possible.
       operationId: ManifestEligibleAsync
-      parameters:
-      - name: request
-        in: body
-        required: false
-        schema:
-          $ref: '#/definitions/ManifestEligibleOrdersRequest'
       responses:
         '201':
           description: The Manifest all eligible orders request was successful.
-          schema:
-            $ref: '#/definitions/ManifestOrdersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestOrdersResponse'
         '202':
           description: The Manifest eligible orders request was successful but PDF is not yet available.
-          schema:
-            $ref: '#/definitions/ManifestOrdersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestOrdersResponse'
         '400':
           description: Bad Request
-          schema:
-            $ref: '#/definitions/ManifestErrorsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestErrorsResponse'
         '401':
           description: Unauthorized
         '403':
@@ -47,10 +42,17 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ManifestErrorsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestErrorsResponse'
       security:
       - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManifestEligibleOrdersRequest'
   /manifests/retry/{manifestIdentifier}:
     post:
       tags:
@@ -59,20 +61,26 @@ paths:
       description: Retry a manifest operation if the eligible orders were not able to be successfully processed.
       operationId: RetryManifestAsync
       parameters:
-      - $ref: '#/parameters/manifestIdentifier'
+      - $ref: '#/components/parameters/manifestIdentifier'
       responses:
         '201':
           description: The Retry Manifest request was successful.
-          schema:
-            $ref: '#/definitions/ManifestOrdersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestOrdersResponse'
         '202':
           description: The retry request was successfully processed but documentation is not yet available.
-          schema:
-            $ref: '#/definitions/ManifestOrdersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestOrdersResponse'
         '400':
           description: Bad Request
-          schema:
-            $ref: '#/definitions/ManifestErrorsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestErrorsResponse'
         '401':
           description: Unauthorized
         '403':
@@ -81,8 +89,10 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ManifestErrorsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestErrorsResponse'
       security:
       - Bearer: []
   /manifests/{manifestIdentifier}:
@@ -93,16 +103,20 @@ paths:
       description: Retrieve manifest paperwork for a previously successful manifest eligible orders call.
       operationId: GetManifestAsync
       parameters:
-      - $ref: '#/parameters/manifestIdentifier'
+      - $ref: '#/components/parameters/manifestIdentifier'
       responses:
         '200':
           description: The Get Manifest request was successfully processed.
-          schema:
-            $ref: '#/definitions/ManifestDetailsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestDetailsResponse'
         '400':
           description: Bad Request
-          schema:
-            $ref: '#/definitions/ManifestErrorsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestErrorsResponse'
         '401':
           description: Unauthorized
         '403':
@@ -111,67 +125,71 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ManifestErrorsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestErrorsResponse'
       security:
       - Bearer: []
-definitions:
-  ManifestDetailsResponse:
-    type: object
-    required:
-    - manifestNumber
-    properties:
-      manifestNumber:
-        type: number
-      status:
-        type: string
-        enum:
-        - In Progress
-        - Completed
-        - Failed
-      documentPdf:
-        type: string
-        description: manifest in format base64 string
-  ManifestEligibleOrdersRequest:
-    type: object
-    properties:
-      carrierName:
-        type: string
-        description: The name of the carrier to manifest orders for.
-  ManifestErrorsErrorDetailsResponse:
-    type: object
-    properties:
-      code:
-        type: string
-      description:
-        type: string
-  ManifestOrdersResponse:
-    type: object
-    required:
-    - manifestNumber
-    properties:
-      manifestNumber:
-        type: number
-      documentPdf:
-        type: string
-        description: manifest in format base64 string
-  ManifestErrorsResponse:
-    type: object
-    properties:
-      errors:
-        type: array
-        items:
-          $ref: '#/definitions/ManifestErrorsErrorDetailsResponse'
-parameters:
-  manifestIdentifier:
-    in: path
-    name: manifestIdentifier
-    required: true
-    type: integer
-    description: The manifest number returned from the initial manifest eligible orders endpoint call
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then your token.
-    name: Authorization
-    in: header
+components:
+  parameters:
+    manifestIdentifier:
+      in: path
+      name: manifestIdentifier
+      required: true
+      description: The manifest number returned from the initial manifest eligible orders endpoint call
+      schema:
+        type: integer
+  schemas:
+    ManifestDetailsResponse:
+      type: object
+      required:
+      - manifestNumber
+      properties:
+        manifestNumber:
+          type: number
+        status:
+          type: string
+          enum:
+          - In Progress
+          - Completed
+          - Failed
+        documentPdf:
+          type: string
+          description: manifest in format base64 string
+    ManifestEligibleOrdersRequest:
+      type: object
+      properties:
+        carrierName:
+          type: string
+          description: The name of the carrier to manifest orders for.
+    ManifestOrdersResponse:
+      type: object
+      required:
+      - manifestNumber
+      properties:
+        manifestNumber:
+          type: number
+        documentPdf:
+          type: string
+          description: manifest in format base64 string
+    ManifestErrorsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestErrorsErrorDetailsResponse'
+    ManifestErrorsErrorDetailsResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then your token.
+      name: Authorization
+      in: header

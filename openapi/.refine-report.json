@@ -1,11 +1,7 @@
 {
   "provider": "royal-mail",
   "sources": [
-    "royal-mail-labels-api-openapi.yml",
-    "royal-mail-manifests-api-openapi.yml",
-    "royal-mail-orders-api-openapi.yml",
-    "royal-mail-returns-api-openapi.yml",
-    "royal-mail-version-api-openapi.yml"
+    "_original/click-and-drop-api-v1.yml"
   ],
   "outputs": [
     "royal-mail-labels-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "click-and-drop-api-v1.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "royal-mail-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "royal-mail-manifests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "royal-mail-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "royal-mail-returns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "royal-mail-version-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

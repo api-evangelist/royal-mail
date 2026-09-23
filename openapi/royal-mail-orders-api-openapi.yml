@@ -1,13 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: ChannelShipper & Royal Mail Public Labels Orders API
+  title: ChannelShipper & Royal Mail Public Orders API
   description: Import your orders, retrieve your orders and generate labels.
   version: 1.0.0
-basePath: /api/v1
-consumes:
-- application/json
-produces:
-- application/json
+servers:
+- url: /api/v1
 tags:
 - name: Orders
 paths:
@@ -18,28 +15,34 @@ paths:
       summary: Retrieve specific orders
       operationId: GetSpecificOrdersAsync
       parameters:
-      - $ref: '#/parameters/orderIdentifiers'
+      - $ref: '#/components/parameters/orderIdentifiers'
       responses:
         '200':
           description: Return list of specific orders
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/GetOrderInfoResource'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetOrderInfoResource'
         '400':
           description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/OrderErrorResponse'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderErrorResponse'
         '401':
           description: Unauthorized
         '404':
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
       - Bearer: []
     delete:
@@ -53,23 +56,25 @@ paths:
 
         a cancelled label be identified on an item in the Royal Mail Network, you will be charged on your account
 
-        and an additional handling fee applied.
-
-        '
+        and an additional handling fee applied.'
       operationId: DeleteOrdersAsync
       parameters:
-      - $ref: '#/parameters/orderIdentifiers'
+      - $ref: '#/components/parameters/orderIdentifiers'
       responses:
         '200':
           description: Provides a list of deleted orders references and ids and errors for orders that failed to delete
-          schema:
-            $ref: '#/definitions/DeleteOrdersResource'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrdersResource'
         '400':
           description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/OrderErrorInfo'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderErrorInfo'
         '401':
           description: Unauthorized
         '403':
@@ -78,8 +83,10 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
       - Bearer: []
   /orders/status:
@@ -88,10 +95,38 @@ paths:
       - Orders
       summary: Set order status
       operationId: UpdateOrdersStatusAsync
-      parameters:
-      - name: request
-        in: body
-        required: true
+      responses:
+        '200':
+          description: Provides a list of orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOrderStatusResponse'
+        '400':
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderUpdateError'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrdersStatusRequest'
         description: 'At least one of ''orderIdentifier'' and ''orderReference'' is required. Providing both is disallowed to avoid ambiguity.
 
 
@@ -102,29 +137,7 @@ paths:
           The maximum collection length is 100.
 
           '
-        schema:
-          $ref: '#/definitions/UpdateOrdersStatusRequest'
-      responses:
-        '200':
-          description: Provides a list of orders
-          schema:
-            $ref: '#/definitions/UpdateOrderStatusResponse'
-        '400':
-          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/OrderUpdateError'
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      security:
-      - Bearer: []
+        required: true
   /orders/{orderIdentifiers}/full:
     get:
       tags:
@@ -133,20 +146,24 @@ paths:
       description: Reserved for ChannelShipper customers only.
       operationId: GetSpecificOrdersWithDetailsAsync
       parameters:
-      - $ref: '#/parameters/orderIdentifiers'
+      - $ref: '#/components/parameters/orderIdentifiers'
       responses:
         '200':
           description: Return detailed information about the orders
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/GetOrderDetailsResource'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetOrderDetailsResource'
         '400':
           description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/OrderErrorResponse'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderErrorResponse'
         '401':
           description: Unauthorized
         '403':
@@ -155,8 +172,10 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
       - Bearer: []
   /orders:
@@ -166,27 +185,33 @@ paths:
       summary: Retrieve pageable list of orders
       operationId: GetOrdersAsync
       parameters:
-      - $ref: '#/parameters/pageSize'
-      - $ref: '#/parameters/startDateTime'
-      - $ref: '#/parameters/endDateTime'
-      - $ref: '#/parameters/continuationToken'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/startDateTime'
+      - $ref: '#/components/parameters/endDateTime'
+      - $ref: '#/components/parameters/continuationToken'
       responses:
         '200':
           description: Return pageable list of orders
-          schema:
-            $ref: '#/definitions/GetOrdersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersResponse'
         '400':
           description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
         '404':
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
       - Bearer: []
     post:
@@ -194,29 +219,35 @@ paths:
       - Orders
       summary: Create orders
       operationId: CreateOrdersAsync
-      parameters:
-      - name: request
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/CreateOrdersRequest'
       responses:
         '200':
           description: Request Processed Successfully
-          schema:
-            $ref: '#/definitions/CreateOrdersResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrdersResponse'
         '400':
           description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
       - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrdersRequest'
+        required: true
   /orders/full:
     get:
       tags:
@@ -225,19 +256,23 @@ paths:
       description: Reserved for ChannelShipper customers only.
       operationId: GetOrdersWithDetailsAsync
       parameters:
-      - $ref: '#/parameters/pageSize'
-      - $ref: '#/parameters/startDateTime'
-      - $ref: '#/parameters/endDateTime'
-      - $ref: '#/parameters/continuationToken'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/startDateTime'
+      - $ref: '#/components/parameters/endDateTime'
+      - $ref: '#/components/parameters/continuationToken'
       responses:
         '200':
           description: Return a pageable list of orders with details
-          schema:
-            $ref: '#/definitions/GetOrdersDetailsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersDetailsResponse'
         '400':
           description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
         '403':
@@ -246,898 +281,906 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
       - Bearer: []
-definitions:
-  ShipmentPackageRequest:
-    required:
-    - weightInGrams
-    - packageFormatIdentifier
-    type: object
-    properties:
-      weightInGrams:
-        format: int32
-        maximum: 30000
-        minimum: 1
-        type: integer
-      packageFormatIdentifier:
-        type: string
-        description: 'Enum: ''undefined'', ''letter'', ''largeLetter'', ''smallParcel'', ''mediumParcel'', ''largeParcel'', ''parcel'', ''documents'''
-      customPackageFormatIdentifier:
-        type: string
-      dimensions:
-        $ref: '#/definitions/DimensionsRequest'
-      contents:
-        type: array
-        items:
-          $ref: '#/definitions/ProductItemRequest'
-  CreateOrderErrorResponse:
-    type: object
-    properties:
-      errorCode:
-        type: integer
-      errorMessage:
-        type: string
-      fields:
-        type: array
-        items:
-          $ref: '#/definitions/OrderFieldResponse'
-  GetOrderInfoResource:
-    required:
-    - orderIdentifier
-    - createdOn
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderReference:
-        type: string
-      createdOn:
-        type: string
-        format: date-time
-      orderDate:
-        type: string
-        format: date-time
-      printedOn:
-        type: string
-        format: date-time
-      manifestedOn:
-        type: string
-        format: date-time
-      shippedOn:
-        type: string
-        format: date-time
-      trackingNumber:
-        type: string
-      packages:
-        type: array
-        items:
-          $ref: '#/definitions/CreatePackagesResponse'
-  TagRequest:
-    type: object
-    properties:
-      key:
-        type: string
-        maxLength: 100
-      value:
-        type: string
-        maxLength: 100
-  UpdateOrderStatusResponse:
-    type: object
-    properties:
-      updatedOrders:
-        type: array
-        items:
-          $ref: '#/definitions/UpdatedOrderInfo'
-      errors:
-        type: array
-        items:
-          $ref: '#/definitions/OrderUpdateError'
-  CreateOrderLabelErrorResponse:
-    type: object
-    properties:
-      message:
-        type: string
-      code:
-        type: string
-  PostageDetailsRequest:
-    type: object
-    properties:
-      sendNotificationsTo:
-        type: string
-        enum:
-        - sender
-        - recipient
-        - billing
-      serviceCode:
-        type: string
-        maxLength: 10
-      carrierName:
-        type: string
-        maxLength: 50
-      serviceRegisterCode:
-        type: string
-        maxLength: 2
-      consequentialLoss:
-        type: integer
-        format: int32
-        minimum: 0
-        maximum: 10000
-      receiveEmailNotification:
-        type: boolean
-      receiveSmsNotification:
-        type: boolean
-      guaranteedSaturdayDelivery:
-        type: boolean
-      requestSignatureUponDelivery:
-        type: boolean
-      isLocalCollect:
-        type: boolean
-      safePlace:
-        type: string
-        maxLength: 90
-      department:
-        type: string
-        maxLength: 150
-      AIRNumber:
-        type: string
-        maxLength: 50
-      IOSSNumber:
-        type: string
-        maxLength: 50
-      requiresExportLicense:
-        type: boolean
-      commercialInvoiceNumber:
-        type: string
-        maxLength: 35
-      commercialInvoiceDate:
-        type: string
-        format: date-time
-      recipientEoriNumber:
-        type: string
-  DimensionsRequest:
-    type: object
-    required:
-    - heightInMms
-    - widthInMms
-    - depthInMms
-    properties:
-      heightInMms:
-        type: integer
-        format: int32
-      widthInMms:
-        type: integer
-        format: int32
-      depthInMms:
-        type: integer
-        format: int32
-  GetShippingDetailsResult:
-    required:
-    - shippingCost
-    type: object
-    properties:
-      shippingCost:
-        type: number
-      trackingNumber:
-        type: string
-      shippingTrackingStatus:
-        type: string
-      serviceCode:
-        type: string
-      shippingService:
-        type: string
-      shippingCarrier:
-        type: string
-      receiveEmailNotification:
-        type: boolean
-      receiveSmsNotification:
-        type: boolean
-      guaranteedSaturdayDelivery:
-        type: boolean
-      requestSignatureUponDelivery:
-        type: boolean
-      isLocalCollect:
-        type: boolean
-      shippingUpdateSuccessDate:
-        type: string
-        format: date-time
-      packages:
-        type: array
-        items:
-          $ref: '#/definitions/CreatePackagesResponse'
-  GetOrdersResponse:
-    type: object
-    properties:
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/GetOrderInfoResource'
-      continuationToken:
-        type: string
-  CreateOrdersResponse:
-    type: object
-    properties:
-      successCount:
-        type: integer
-      errorsCount:
-        type: integer
-      createdOrders:
-        type: array
-        items:
-          $ref: '#/definitions/CreateOrderResponse'
-      failedOrders:
-        type: array
-        items:
-          $ref: '#/definitions/FailedOrderResponse'
-  CreatePackagesResponse:
-    type: object
-    properties:
-      packageNumber:
-        type: integer
-      trackingNumber:
-        type: string
-  GetPostalDetailsResult:
-    type: object
-    properties:
-      title:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-      companyName:
-        type: string
-      addressLine1:
-        type: string
-      addressLine2:
-        type: string
-      addressLine3:
-        type: string
-      city:
-        type: string
-      county:
-        type: string
-      postcode:
-        type: string
-      countryCode:
-        type: string
-        maxLength: 3
-      phoneNumber:
-        type: string
-      emailAddress:
-        type: string
-  LabelGenerationRequest:
-    type: object
-    description: Reserved for OBA customers only.
-    required:
-    - includeLabelInResponse
-    properties:
-      includeLabelInResponse:
-        type: boolean
-      includeCN:
-        type: boolean
-      includeReturnsLabel:
-        type: boolean
-  GetOrderLineResult:
-    required:
-    - quantity
-    type: object
-    properties:
-      SKU:
-        type: string
-      name:
-        type: string
-      quantity:
-        type: integer
-      unitValue:
-        type: number
-      lineTotal:
-        type: number
-      customsCode:
-        type: string
-  AddressRequest:
-    required:
-    - addressLine1
-    - city
-    - countryCode
-    type: object
-    properties:
-      fullName:
-        maxLength: 210
-        type: string
-      companyName:
-        maxLength: 100
-        type: string
-      addressLine1:
-        maxLength: 100
-        type: string
-      addressLine2:
-        maxLength: 100
-        type: string
-      addressLine3:
-        maxLength: 100
-        type: string
-      city:
-        maxLength: 100
-        type: string
-      county:
-        maxLength: 100
-        type: string
-      postcode:
-        maxLength: 20
-        type: string
-      countryCode:
-        maxLength: 3
-        type: string
-  OrderErrorResponse:
-    type: object
-    properties:
-      accountOrderNumber:
-        type: integer
-      channelOrderReference:
-        type: string
-      code:
-        type: string
-      message:
-        type: string
-  SenderDetailsRequest:
-    type: object
-    properties:
-      tradingName:
-        type: string
-        maxLength: 250
-      phoneNumber:
-        maxLength: 25
-        type: string
-      emailAddress:
-        maxLength: 254
-        type: string
-  ErrorResponse:
-    required:
-    - message
-    type: object
-    properties:
-      code:
-        type: string
-      message:
-        type: string
-      details:
-        type: string
-  GetOrderDetailsResource:
-    required:
-    - subtotal
-    - shippingCostCharged
-    - orderDiscount
-    - total
-    - weightInGrams
-    - shippingDetails
-    - shippingInfo
-    - billingInfo
-    - orderLines
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderStatus:
-        type: string
-      createdOn:
-        type: string
-        format: date-time
-      printedOn:
-        type: string
-        format: date-time
-      shippedOn:
-        type: string
-        format: date-time
-      postageAppliedOn:
-        type: string
-        format: date-time
-      manifestedOn:
-        type: string
-        format: date-time
-      orderDate:
-        type: string
-        format: date-time
-      despatchedByOtherCourierOn:
-        type: string
-        format: date-time
-      tradingName:
-        type: string
-      channel:
-        type: string
-      marketplaceTypeName:
-        type: string
-      department:
-        type: string
-      AIRNumber:
-        type: string
-      requiresExportLicense:
-        type: boolean
-      commercialInvoiceNumber:
-        type: string
-      commercialInvoiceDate:
-        type: string
-        format: date-time
-      orderReference:
-        type: string
-      channelShippingMethod:
-        type: string
-      specialInstructions:
-        type: string
-      pickerSpecialInstructions:
-        type: string
-      subtotal:
-        type: number
-      shippingCostCharged:
-        type: number
-      orderDiscount:
-        type: number
-      total:
-        type: number
-      weightInGrams:
-        type: integer
-      packageSize:
-        type: string
-      accountBatchNumber:
-        type: string
-      currencyCode:
-        type: string
-        maxLength: 3
-      shippingDetails:
-        $ref: '#/definitions/GetShippingDetailsResult'
-      shippingInfo:
-        $ref: '#/definitions/GetPostalDetailsResult'
-      billingInfo:
-        $ref: '#/definitions/GetPostalDetailsResult'
-      orderLines:
-        type: array
-        items:
-          $ref: '#/definitions/GetOrderLineResult'
-      tags:
-        type: array
-        items:
-          $ref: '#/definitions/GetTagDetailsResult'
-  UpdateOrdersStatusRequest:
-    type: object
-    properties:
-      items:
-        minLength: 1
-        type: array
-        items:
-          $ref: '#/definitions/UpdateOrderStatusRequest'
-  OrderUpdateError:
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderReference:
-        type: string
-      status:
-        type: string
-      code:
-        type: string
-      message:
-        type: string
-  CreateOrderRequest:
-    required:
-    - recipient
-    - orderDate
-    - subtotal
-    - shippingCostCharged
-    - total
-    type: object
-    properties:
-      orderReference:
-        maxLength: 40
-        type: string
-      isRecipientABusiness:
-        type: boolean
-      recipient:
-        $ref: '#/definitions/RecipientDetailsRequest'
-      sender:
-        $ref: '#/definitions/SenderDetailsRequest'
-      billing:
-        $ref: '#/definitions/BillingDetailsRequest'
-      packages:
-        type: array
-        items:
-          $ref: '#/definitions/ShipmentPackageRequest'
-      orderDate:
-        format: date-time
-        type: string
-      plannedDespatchDate:
-        format: date-time
-        type: string
-      specialInstructions:
-        type: string
-        maxLength: 500
-      subtotal:
-        type: number
-        format: decimal
-        multipleOf: 0.01
-        minimum: 0
-        maximum: 999999
-      shippingCostCharged:
-        type: number
-        format: decimal
-        multipleOf: 0.01
-        minimum: 0
-        maximum: 999999
-      otherCosts:
-        type: number
-        format: decimal
-        multipleOf: 0.01
-        minimum: 0
-        maximum: 999999
-      customsDutyCosts:
-        type: number
-        format: decimal
-        multipleOf: 0.01
-        minimum: 0
-        maximum: 99999.99
-      total:
-        format: decimal
-        multipleOf: 0.01
-        type: number
-        minimum: 0
-        maximum: 999999
-      currencyCode:
-        type: string
-        maxLength: 3
-      postageDetails:
-        $ref: '#/definitions/PostageDetailsRequest'
-      tags:
-        type: array
-        items:
-          $ref: '#/definitions/TagRequest'
-      label:
-        $ref: '#/definitions/LabelGenerationRequest'
-      orderTax:
-        format: decimal
-        multipleOf: 0.01
-        type: number
-        minimum: 0
-        maximum: 999999
-      containsDangerousGoods:
-        type: boolean
-      dangerousGoodsUnCode:
-        type: string
-        maxLength: 4
-      dangerousGoodsDescription:
-        type: number
-        maxLength: 500
-      dangerousGoodsQuantity:
-        type: number
-      importer:
-        $ref: '#/definitions/Importer'
-  RecipientDetailsRequest:
-    type: object
-    properties:
-      address:
-        $ref: '#/definitions/AddressRequest'
-      phoneNumber:
-        maxLength: 25
-        type: string
-      emailAddress:
-        maxLength: 254
-        type: string
-      addressBookReference:
-        maxLength: 100
-        type: string
-  UpdatedOrderInfo:
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderReference:
-        type: string
-      status:
-        type: string
-        description: Current status of the order
-  FailedOrderResponse:
-    type: object
-    properties:
-      order:
-        $ref: '#/definitions/CreateOrderRequest'
-      errors:
-        type: array
-        items:
-          $ref: '#/definitions/CreateOrderErrorResponse'
-  DeleteOrdersResource:
-    type: object
-    properties:
-      deletedOrders:
-        type: array
-        items:
-          $ref: '#/definitions/DeletedOrderInfo'
-      errors:
-        type: array
-        items:
-          $ref: '#/definitions/OrderErrorInfo'
-  BillingDetailsRequest:
-    type: object
-    properties:
-      address:
-        $ref: '#/definitions/AddressRequest'
-      phoneNumber:
-        maxLength: 25
-        type: string
-      emailAddress:
-        maxLength: 254
-        type: string
-  UpdateOrderStatusRequest:
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-        format: int32
-      orderReference:
-        type: string
-      status:
-        type: string
-        enum:
-        - new
-        - despatchedByOtherCourier
-        - despatched
-      trackingNumber:
-        type: string
-      despatchDate:
-        format: date-time
-        type: string
-      shippingCarrier:
-        type: string
-      shippingService:
-        type: string
-  GetTagDetailsResult:
-    type: object
-    properties:
-      key:
-        type: string
-        maxLength: 100
-      value:
-        type: string
-        maxLength: 100
-  OrderErrorInfo:
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderReference:
-        type: string
-      code:
-        type: string
-      message:
-        type: string
-  DeletedOrderInfo:
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderReference:
-        type: string
-      orderInfo:
-        type: string
-  GetOrdersDetailsResponse:
-    type: object
-    properties:
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/GetOrderDetailsResource'
-      continuationToken:
-        type: string
-  OrderFieldResponse:
-    type: object
-    properties:
-      fieldName:
-        type: string
-      value:
-        type: string
-  CreateOrderResponse:
-    required:
-    - orderIdentifier
-    - createdOn
-    type: object
-    properties:
-      orderIdentifier:
-        type: integer
-      orderReference:
-        type: string
-      createdOn:
-        type: string
-        format: date-time
-      orderDate:
-        type: string
-        format: date-time
-      printedOn:
-        type: string
-        format: date-time
-      manifestedOn:
-        type: string
-        format: date-time
-      shippedOn:
-        type: string
-        format: date-time
-      trackingNumber:
-        type: string
-      packages:
-        type: array
-        items:
-          $ref: '#/definitions/CreatePackagesResponse'
-      label:
-        type: string
-        description: label in format base64 string
-      labelErrors:
-        type: array
-        items:
-          $ref: '#/definitions/CreateOrderLabelErrorResponse'
-      generatedDocuments:
-        type: array
-        items:
+components:
+  schemas:
+    RecipientDetailsRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressRequest'
+        phoneNumber:
+          maxLength: 25
           type: string
-  Importer:
-    type: object
-    properties:
-      companyName:
-        type: string
-        maxLength: 100
-      addressLine1:
-        type: string
-        maxLength: 100
-      addressLine2:
-        type: string
-        maxLength: 100
-      addressLine3:
-        type: string
-        maxLength: 100
-      city:
-        type: string
-        maxLength: 100
-      postcode:
-        type: string
-        maxLength: 20
-      country:
-        type: string
-        maxLength: 100
-      businessName:
-        type: string
-        maxLength: 100
-      contactName:
-        type: string
-        maxLength: 100
-      phoneNumber:
-        type: string
-        maxLength: 25
-      emailAddress:
-        type: string
-        maxLength: 254
-      vatNumber:
-        type: string
-        maxLength: 15
-      taxCode:
-        type: string
-        maxLength: 25
-      eoriNumber:
-        type: string
-        maxLength: 18
-      isABusiness:
-        type: boolean
-  CreateOrdersRequest:
-    required:
-    - items
-    type: object
-    properties:
-      items:
-        minLength: 1
-        type: array
+        emailAddress:
+          maxLength: 254
+          type: string
+        addressBookReference:
+          maxLength: 100
+          type: string
+    GetOrderInfoResource:
+      required:
+      - orderIdentifier
+      - createdOn
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderReference:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        orderDate:
+          type: string
+          format: date-time
+        printedOn:
+          type: string
+          format: date-time
+        manifestedOn:
+          type: string
+          format: date-time
+        shippedOn:
+          type: string
+          format: date-time
+        trackingNumber:
+          type: string
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatePackagesResponse'
+    GetOrderLineResult:
+      required:
+      - quantity
+      type: object
+      properties:
+        SKU:
+          type: string
+        name:
+          type: string
+        quantity:
+          type: integer
+        unitValue:
+          type: number
+        lineTotal:
+          type: number
+        customsCode:
+          type: string
+    FailedOrderResponse:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/CreateOrderRequest'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderErrorResponse'
+    AddressRequest:
+      required:
+      - addressLine1
+      - city
+      - countryCode
+      type: object
+      properties:
+        fullName:
+          maxLength: 210
+          type: string
+        companyName:
+          maxLength: 100
+          type: string
+        addressLine1:
+          maxLength: 100
+          type: string
+        addressLine2:
+          maxLength: 100
+          type: string
+        addressLine3:
+          maxLength: 100
+          type: string
+        city:
+          maxLength: 100
+          type: string
+        county:
+          maxLength: 100
+          type: string
+        postcode:
+          maxLength: 20
+          type: string
+        countryCode:
+          maxLength: 3
+          type: string
+    CreatePackagesResponse:
+      type: object
+      properties:
+        packageNumber:
+          type: integer
+        trackingNumber:
+          type: string
+    GetTagDetailsResult:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 100
+        value:
+          type: string
+          maxLength: 100
+    PostageDetailsRequest:
+      type: object
+      properties:
+        sendNotificationsTo:
+          type: string
+          enum:
+          - sender
+          - recipient
+          - billing
+        serviceCode:
+          type: string
+          maxLength: 10
+        carrierName:
+          type: string
+          maxLength: 50
+        serviceRegisterCode:
+          type: string
+          maxLength: 2
+        consequentialLoss:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 10000
+        receiveEmailNotification:
+          type: boolean
+        receiveSmsNotification:
+          type: boolean
+        guaranteedSaturdayDelivery:
+          type: boolean
+        requestSignatureUponDelivery:
+          type: boolean
+        isLocalCollect:
+          type: boolean
+        safePlace:
+          type: string
+          maxLength: 90
+        department:
+          type: string
+          maxLength: 150
+        AIRNumber:
+          type: string
+          maxLength: 50
+        IOSSNumber:
+          type: string
+          maxLength: 50
+        requiresExportLicense:
+          type: boolean
+        commercialInvoiceNumber:
+          type: string
+          maxLength: 35
+        commercialInvoiceDate:
+          type: string
+          format: date-time
+        recipientEoriNumber:
+          type: string
+    GetPostalDetailsResult:
+      type: object
+      properties:
+        title:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postcode:
+          type: string
+        countryCode:
+          type: string
+          maxLength: 3
+        phoneNumber:
+          type: string
+        emailAddress:
+          type: string
+    ErrorResponse:
+      required:
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+    Importer:
+      type: object
+      properties:
+        companyName:
+          type: string
+          maxLength: 100
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 100
+        addressLine3:
+          type: string
+          maxLength: 100
+        city:
+          type: string
+          maxLength: 100
+        postcode:
+          type: string
+          maxLength: 20
+        country:
+          type: string
+          maxLength: 100
+        businessName:
+          type: string
+          maxLength: 100
+        contactName:
+          type: string
+          maxLength: 100
+        phoneNumber:
+          type: string
+          maxLength: 25
+        emailAddress:
+          type: string
+          maxLength: 254
+        vatNumber:
+          type: string
+          maxLength: 15
+        taxCode:
+          type: string
+          maxLength: 25
+        eoriNumber:
+          type: string
+          maxLength: 18
+        isABusiness:
+          type: boolean
+    DeletedOrderInfo:
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderReference:
+          type: string
+        orderInfo:
+          type: string
+    UpdateOrderStatusRequest:
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+          format: int32
+        orderReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - new
+          - despatchedByOtherCourier
+          - despatched
+        trackingNumber:
+          type: string
+        despatchDate:
+          format: date-time
+          type: string
+        shippingCarrier:
+          type: string
+        shippingService:
+          type: string
+    OrderErrorResponse:
+      type: object
+      properties:
+        accountOrderNumber:
+          type: integer
+        channelOrderReference:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
+    GetShippingDetailsResult:
+      required:
+      - shippingCost
+      type: object
+      properties:
+        shippingCost:
+          type: number
+        trackingNumber:
+          type: string
+        shippingTrackingStatus:
+          type: string
+        serviceCode:
+          type: string
+        shippingService:
+          type: string
+        shippingCarrier:
+          type: string
+        receiveEmailNotification:
+          type: boolean
+        receiveSmsNotification:
+          type: boolean
+        guaranteedSaturdayDelivery:
+          type: boolean
+        requestSignatureUponDelivery:
+          type: boolean
+        isLocalCollect:
+          type: boolean
+        shippingUpdateSuccessDate:
+          type: string
+          format: date-time
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatePackagesResponse'
+    DimensionsRequest:
+      type: object
+      required:
+      - heightInMms
+      - widthInMms
+      - depthInMms
+      properties:
+        heightInMms:
+          type: integer
+          format: int32
+        widthInMms:
+          type: integer
+          format: int32
+        depthInMms:
+          type: integer
+          format: int32
+    OrderFieldResponse:
+      type: object
+      properties:
+        fieldName:
+          type: string
+        value:
+          type: string
+    UpdateOrderStatusResponse:
+      type: object
+      properties:
+        updatedOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdatedOrderInfo'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderUpdateError'
+    OrderUpdateError:
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderReference:
+          type: string
+        status:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
+    GetOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetOrderInfoResource'
+        continuationToken:
+          type: string
+    CreateOrderErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+        errorMessage:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderFieldResponse'
+    CreateOrdersRequest:
+      required:
+      - items
+      type: object
+      properties:
         items:
-          $ref: '#/definitions/CreateOrderRequest'
-  ProductItemRequest:
-    required:
-    - quantity
-    type: object
-    properties:
-      name:
-        type: string
-        maxLength: 800
-      SKU:
-        type: string
-        maxLength: 100
-      quantity:
-        format: int32
+          minLength: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderRequest'
+    SenderDetailsRequest:
+      type: object
+      properties:
+        tradingName:
+          type: string
+          maxLength: 250
+        phoneNumber:
+          maxLength: 25
+          type: string
+        emailAddress:
+          maxLength: 254
+          type: string
+    BillingDetailsRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressRequest'
+        phoneNumber:
+          maxLength: 25
+          type: string
+        emailAddress:
+          maxLength: 254
+          type: string
+    CreateOrdersResponse:
+      type: object
+      properties:
+        successCount:
+          type: integer
+        errorsCount:
+          type: integer
+        createdOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderResponse'
+        failedOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/FailedOrderResponse'
+    LabelGenerationRequest:
+      type: object
+      description: Reserved for OBA customers only.
+      required:
+      - includeLabelInResponse
+      properties:
+        includeLabelInResponse:
+          type: boolean
+        includeCN:
+          type: boolean
+        includeReturnsLabel:
+          type: boolean
+    DeleteOrdersResource:
+      type: object
+      properties:
+        deletedOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedOrderInfo'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderErrorInfo'
+    CreateOrderLabelErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    GetOrdersDetailsResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetOrderDetailsResource'
+        continuationToken:
+          type: string
+    CreateOrderResponse:
+      required:
+      - orderIdentifier
+      - createdOn
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderReference:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        orderDate:
+          type: string
+          format: date-time
+        printedOn:
+          type: string
+          format: date-time
+        manifestedOn:
+          type: string
+          format: date-time
+        shippedOn:
+          type: string
+          format: date-time
+        trackingNumber:
+          type: string
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatePackagesResponse'
+        label:
+          type: string
+          description: label in format base64 string
+        labelErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderLabelErrorResponse'
+        generatedDocuments:
+          type: array
+          items:
+            type: string
+    UpdateOrdersStatusRequest:
+      type: object
+      properties:
+        items:
+          minLength: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateOrderStatusRequest'
+    ShipmentPackageRequest:
+      required:
+      - weightInGrams
+      - packageFormatIdentifier
+      type: object
+      properties:
+        weightInGrams:
+          format: int32
+          maximum: 30000
+          minimum: 1
+          type: integer
+        packageFormatIdentifier:
+          type: string
+          description: 'Enum: ''undefined'', ''letter'', ''largeLetter'', ''smallParcel'', ''mediumParcel'', ''largeParcel'', ''parcel'', ''documents'''
+        customPackageFormatIdentifier:
+          type: string
+        dimensions:
+          $ref: '#/components/schemas/DimensionsRequest'
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductItemRequest'
+    GetOrderDetailsResource:
+      required:
+      - subtotal
+      - shippingCostCharged
+      - orderDiscount
+      - total
+      - weightInGrams
+      - shippingDetails
+      - shippingInfo
+      - billingInfo
+      - orderLines
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderStatus:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        printedOn:
+          type: string
+          format: date-time
+        shippedOn:
+          type: string
+          format: date-time
+        postageAppliedOn:
+          type: string
+          format: date-time
+        manifestedOn:
+          type: string
+          format: date-time
+        orderDate:
+          type: string
+          format: date-time
+        despatchedByOtherCourierOn:
+          type: string
+          format: date-time
+        tradingName:
+          type: string
+        channel:
+          type: string
+        marketplaceTypeName:
+          type: string
+        department:
+          type: string
+        AIRNumber:
+          type: string
+        requiresExportLicense:
+          type: boolean
+        commercialInvoiceNumber:
+          type: string
+        commercialInvoiceDate:
+          type: string
+          format: date-time
+        orderReference:
+          type: string
+        channelShippingMethod:
+          type: string
+        specialInstructions:
+          type: string
+        pickerSpecialInstructions:
+          type: string
+        subtotal:
+          type: number
+        shippingCostCharged:
+          type: number
+        orderDiscount:
+          type: number
+        total:
+          type: number
+        weightInGrams:
+          type: integer
+        packageSize:
+          type: string
+        accountBatchNumber:
+          type: string
+        currencyCode:
+          type: string
+          maxLength: 3
+        shippingDetails:
+          $ref: '#/components/schemas/GetShippingDetailsResult'
+        shippingInfo:
+          $ref: '#/components/schemas/GetPostalDetailsResult'
+        billingInfo:
+          $ref: '#/components/schemas/GetPostalDetailsResult'
+        orderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetOrderLineResult'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetTagDetailsResult'
+    TagRequest:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 100
+        value:
+          type: string
+          maxLength: 100
+    OrderErrorInfo:
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderReference:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
+    CreateOrderRequest:
+      required:
+      - recipient
+      - orderDate
+      - subtotal
+      - shippingCostCharged
+      - total
+      type: object
+      properties:
+        orderReference:
+          maxLength: 40
+          type: string
+        isRecipientABusiness:
+          type: boolean
+        recipient:
+          $ref: '#/components/schemas/RecipientDetailsRequest'
+        sender:
+          $ref: '#/components/schemas/SenderDetailsRequest'
+        billing:
+          $ref: '#/components/schemas/BillingDetailsRequest'
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentPackageRequest'
+        orderDate:
+          format: date-time
+          type: string
+        plannedDespatchDate:
+          format: date-time
+          type: string
+        specialInstructions:
+          type: string
+          maxLength: 500
+        subtotal:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+          minimum: 0
+          maximum: 999999
+        shippingCostCharged:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+          minimum: 0
+          maximum: 999999
+        otherCosts:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+          minimum: 0
+          maximum: 999999
+        customsDutyCosts:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+          minimum: 0
+          maximum: 99999.99
+        total:
+          format: decimal
+          multipleOf: 0.01
+          type: number
+          minimum: 0
+          maximum: 999999
+        currencyCode:
+          type: string
+          maxLength: 3
+        postageDetails:
+          $ref: '#/components/schemas/PostageDetailsRequest'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagRequest'
+        label:
+          $ref: '#/components/schemas/LabelGenerationRequest'
+        orderTax:
+          format: decimal
+          multipleOf: 0.01
+          type: number
+          minimum: 0
+          maximum: 999999
+        containsDangerousGoods:
+          type: boolean
+        dangerousGoodsUnCode:
+          type: string
+          maxLength: 4
+        dangerousGoodsDescription:
+          type: number
+          maxLength: 500
+        dangerousGoodsQuantity:
+          type: number
+        importer:
+          $ref: '#/components/schemas/Importer'
+    UpdatedOrderInfo:
+      type: object
+      properties:
+        orderIdentifier:
+          type: integer
+        orderReference:
+          type: string
+        status:
+          type: string
+          description: Current status of the order
+    ProductItemRequest:
+      required:
+      - quantity
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 800
+        SKU:
+          type: string
+          maxLength: 100
+        quantity:
+          format: int32
+          type: integer
+          minimum: 1
+          maximum: 999999
+        unitValue:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+          minimum: 0
+          maximum: 999999
+        unitWeightInGrams:
+          type: integer
+          minimum: 0
+          maximum: 999999
+        customsDescription:
+          type: string
+          maxLength: 50
+        extendedCustomsDescription:
+          type: string
+          maxLength: 300
+        customsCode:
+          type: string
+          maxLength: 10
+        originCountryCode:
+          type: string
+          maxLength: 3
+        customsDeclarationCategory:
+          type: string
+          enum:
+          - none
+          - gift
+          - commercialSample
+          - documents
+          - other
+          - returnedGoods
+          - commercialSaleOfGoods
+          - eCommerceSaleOfGoods
+        requiresExportLicence:
+          type: boolean
+        stockLocation:
+          type: string
+          maxLength: 50
+        useOriginPreference:
+          type: boolean
+        supplementaryUnits:
+          type: string
+          maxLength: 17
+        licenseNumber:
+          type: string
+          maxLength: 41
+        certificateNumber:
+          type: string
+          maxLength: 41
+  parameters:
+    pageSize:
+      in: query
+      name: pageSize
+      required: false
+      description: The number of items to return
+      schema:
         type: integer
+        default: 25
+        maximum: 100
         minimum: 1
-        maximum: 999999
-      unitValue:
-        type: number
-        format: decimal
-        multipleOf: 0.01
-        minimum: 0
-        maximum: 999999
-      unitWeightInGrams:
-        type: integer
-        minimum: 0
-        maximum: 999999
-      customsDescription:
+    endDateTime:
+      in: query
+      name: endDateTime
+      required: false
+      description: Date and time upper bound for items filtering
+      schema:
         type: string
-        maxLength: 50
-      extendedCustomsDescription:
+        format: date-time
+    startDateTime:
+      in: query
+      name: startDateTime
+      required: false
+      description: Date and time lower bound for items filtering
+      schema:
         type: string
-        maxLength: 300
-      customsCode:
+        format: date-time
+    continuationToken:
+      in: query
+      name: continuationToken
+      required: false
+      description: The token for retrieving the next page of items
+      schema:
         type: string
-        maxLength: 10
-      originCountryCode:
+    orderIdentifiers:
+      in: path
+      name: orderIdentifiers
+      required: true
+      description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
+      schema:
         type: string
-        maxLength: 3
-      customsDeclarationCategory:
-        type: string
-        enum:
-        - none
-        - gift
-        - commercialSample
-        - documents
-        - other
-        - returnedGoods
-        - commercialSaleOfGoods
-        - eCommerceSaleOfGoods
-      requiresExportLicence:
-        type: boolean
-      stockLocation:
-        type: string
-        maxLength: 50
-      useOriginPreference:
-        type: boolean
-      supplementaryUnits:
-        type: string
-        maxLength: 17
-      licenseNumber:
-        type: string
-        maxLength: 41
-      certificateNumber:
-        type: string
-        maxLength: 41
-parameters:
-  orderIdentifiers:
-    in: path
-    name: orderIdentifiers
-    required: true
-    type: string
-    description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
-  continuationToken:
-    in: query
-    name: continuationToken
-    type: string
-    required: false
-    description: The token for retrieving the next page of items
-  endDateTime:
-    in: query
-    name: endDateTime
-    type: string
-    format: date-time
-    required: false
-    description: Date and time upper bound for items filtering
-  pageSize:
-    in: query
-    name: pageSize
-    required: false
-    type: integer
-    minimum: 1
-    maximum: 100
-    default: 25
-    description: The number of items to return
-  startDateTime:
-    in: query
-    name: startDateTime
-    type: string
-    format: date-time
-    required: false
-    description: Date and time lower bound for items filtering
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then your token.
-    name: Authorization
-    in: header
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Authorization header using the Bearer scheme. Enter 'Bearer [space] and then your token.
+      name: Authorization
+      in: header
