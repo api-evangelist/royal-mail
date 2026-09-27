@@ -132,15 +132,17 @@ paths:
       security:
       - Bearer: []
 components:
-  parameters:
-    manifestIdentifier:
-      in: path
-      name: manifestIdentifier
-      required: true
-      description: The manifest number returned from the initial manifest eligible orders endpoint call
-      schema:
-        type: integer
   schemas:
+    ManifestOrdersResponse:
+      type: object
+      required:
+      - manifestNumber
+      properties:
+        manifestNumber:
+          type: number
+        documentPdf:
+          type: string
+          description: manifest in format base64 string
     ManifestDetailsResponse:
       type: object
       required:
@@ -163,16 +165,6 @@ components:
         carrierName:
           type: string
           description: The name of the carrier to manifest orders for.
-    ManifestOrdersResponse:
-      type: object
-      required:
-      - manifestNumber
-      properties:
-        manifestNumber:
-          type: number
-        documentPdf:
-          type: string
-          description: manifest in format base64 string
     ManifestErrorsResponse:
       type: object
       properties:
@@ -187,6 +179,14 @@ components:
           type: string
         description:
           type: string
+  parameters:
+    manifestIdentifier:
+      in: path
+      name: manifestIdentifier
+      required: true
+      description: The manifest number returned from the initial manifest eligible orders endpoint call
+      schema:
+        type: integer
   securitySchemes:
     Bearer:
       type: apiKey

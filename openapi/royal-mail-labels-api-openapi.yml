@@ -68,6 +68,40 @@ paths:
       security:
       - Bearer: []
 components:
+  parameters:
+    includeReturnsLabel:
+      in: query
+      name: includeReturnsLabel
+      required: false
+      description: Include returns label. Required when documentType is set to 'postageLabel'.
+      schema:
+        type: boolean
+    documentType:
+      in: query
+      name: documentType
+      required: true
+      description: Document generation mode.
+      schema:
+        type: string
+        enum:
+        - postageLabel
+        - despatchNote
+        - CN22
+        - CN23
+    includeCN:
+      in: query
+      name: includeCN
+      required: false
+      description: Include CN22/CN23 with label.
+      schema:
+        type: boolean
+    orderIdentifiers:
+      in: path
+      name: orderIdentifiers
+      required: true
+      description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
+      schema:
+        type: string
   schemas:
     OrderErrorResponse:
       type: object
@@ -91,40 +125,6 @@ components:
           type: string
         details:
           type: string
-  parameters:
-    includeCN:
-      in: query
-      name: includeCN
-      required: false
-      description: Include CN22/CN23 with label.
-      schema:
-        type: boolean
-    includeReturnsLabel:
-      in: query
-      name: includeReturnsLabel
-      required: false
-      description: Include returns label. Required when documentType is set to 'postageLabel'.
-      schema:
-        type: boolean
-    orderIdentifiers:
-      in: path
-      name: orderIdentifiers
-      required: true
-      description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
-      schema:
-        type: string
-    documentType:
-      in: query
-      name: documentType
-      required: true
-      description: Document generation mode.
-      schema:
-        type: string
-        enum:
-        - postageLabel
-        - despatchNote
-        - CN22
-        - CN23
   securitySchemes:
     Bearer:
       type: apiKey
