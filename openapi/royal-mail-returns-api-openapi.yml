@@ -62,6 +62,68 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Shipment:
+      type: object
+      properties:
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+        returnAddress:
+          $ref: '#/components/schemas/Address'
+        customerReference:
+          $ref: '#/components/schemas/CustomerReference'
+    GetServicesResponse:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceItem'
+    CustomerReference:
+      type: object
+      properties:
+        reference:
+          type: string
+    CreateReturnRequest:
+      type: object
+      properties:
+        service:
+          $ref: '#/components/schemas/ServiceCode'
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+    ServiceItem:
+      type: object
+      properties:
+        carrierGuid:
+          type: string
+          format: uuid
+        carrierServiceGuid:
+          type: string
+          format: uuid
+        serviceName:
+          type: string
+        serviceCode:
+          type: string
+    ServiceCode:
+      type: object
+      properties:
+        serviceCode:
+          type: string
+        serviceRegisterCode:
+          type: string
+    CreateReturnResponse:
+      type: object
+      properties:
+        shipment:
+          type: object
+          properties:
+            trackingNumber:
+              type: string
+            uniqueItemId:
+              type: string
+        qrCode:
+          type: string
+        label:
+          type: string
     Address:
       type: object
       properties:
@@ -88,68 +150,6 @@ components:
         country:
           type: string
         countryIsoCode:
-          type: string
-    CreateReturnRequest:
-      type: object
-      properties:
-        service:
-          $ref: '#/components/schemas/ServiceCode'
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-    ServiceCode:
-      type: object
-      properties:
-        serviceCode:
-          type: string
-        serviceRegisterCode:
-          type: string
-    CreateReturnResponse:
-      type: object
-      properties:
-        shipment:
-          type: object
-          properties:
-            trackingNumber:
-              type: string
-            uniqueItemId:
-              type: string
-        qrCode:
-          type: string
-        label:
-          type: string
-    GetServicesResponse:
-      type: object
-      properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceItem'
-    Shipment:
-      type: object
-      properties:
-        shippingAddress:
-          $ref: '#/components/schemas/Address'
-        returnAddress:
-          $ref: '#/components/schemas/Address'
-        customerReference:
-          $ref: '#/components/schemas/CustomerReference'
-    CustomerReference:
-      type: object
-      properties:
-        reference:
-          type: string
-    ServiceItem:
-      type: object
-      properties:
-        carrierGuid:
-          type: string
-          format: uuid
-        carrierServiceGuid:
-          type: string
-          format: uuid
-        serviceName:
-          type: string
-        serviceCode:
           type: string
   securitySchemes:
     Bearer:

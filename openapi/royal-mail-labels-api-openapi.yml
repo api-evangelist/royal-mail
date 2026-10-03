@@ -69,13 +69,13 @@ paths:
       - Bearer: []
 components:
   parameters:
-    includeReturnsLabel:
-      in: query
-      name: includeReturnsLabel
-      required: false
-      description: Include returns label. Required when documentType is set to 'postageLabel'.
+    orderIdentifiers:
+      in: path
+      name: orderIdentifiers
+      required: true
+      description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
       schema:
-        type: boolean
+        type: string
     documentType:
       in: query
       name: documentType
@@ -88,6 +88,13 @@ components:
         - despatchNote
         - CN22
         - CN23
+    includeReturnsLabel:
+      in: query
+      name: includeReturnsLabel
+      required: false
+      description: Include returns label. Required when documentType is set to 'postageLabel'.
+      schema:
+        type: boolean
     includeCN:
       in: query
       name: includeCN
@@ -95,13 +102,6 @@ components:
       description: Include CN22/CN23 with label.
       schema:
         type: boolean
-    orderIdentifiers:
-      in: path
-      name: orderIdentifiers
-      required: true
-      description: One or several Order Identifiers or Order References separated by semicolon. The maximum number of identifiers is 100.
-      schema:
-        type: string
   schemas:
     OrderErrorResponse:
       type: object
