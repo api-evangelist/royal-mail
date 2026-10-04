@@ -133,6 +133,26 @@ paths:
       - Bearer: []
 components:
   schemas:
+    ManifestErrorsErrorDetailsResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+    ManifestErrorsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestErrorsErrorDetailsResponse'
+    ManifestEligibleOrdersRequest:
+      type: object
+      properties:
+        carrierName:
+          type: string
+          description: The name of the carrier to manifest orders for.
     ManifestDetailsResponse:
       type: object
       required:
@@ -149,13 +169,6 @@ components:
         documentPdf:
           type: string
           description: manifest in format base64 string
-    ManifestErrorsErrorDetailsResponse:
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
     ManifestOrdersResponse:
       type: object
       required:
@@ -166,19 +179,6 @@ components:
         documentPdf:
           type: string
           description: manifest in format base64 string
-    ManifestErrorsResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManifestErrorsErrorDetailsResponse'
-    ManifestEligibleOrdersRequest:
-      type: object
-      properties:
-        carrierName:
-          type: string
-          description: The name of the carrier to manifest orders for.
   parameters:
     manifestIdentifier:
       in: path

@@ -29,17 +29,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      required:
-      - message
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
     GetVersionResource:
       required:
       - releaseDate
@@ -54,6 +43,17 @@ components:
         releaseDate:
           type: string
           format: date-time
+    ErrorResponse:
+      required:
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey
