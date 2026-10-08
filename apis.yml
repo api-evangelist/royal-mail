@@ -238,6 +238,8 @@ apis:
   - type: Documentation
     url: https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml
 common:
+- type: FinOps
+  url: finops/finops.yml
 - type: Website
   url: https://royalmail.net
 - type: CapabilityMap
