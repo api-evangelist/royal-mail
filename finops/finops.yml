@@ -1,3 +1,11 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+# Coverage demoted 2026-10-07 (roadmap#942, PLAN.md Stage A): this file was written by an API Evangelist
+# sweep and names no billing unit, meters or pricing category read from the provider — it restates the
+# FinOps framework. It is `x-coverage: unmeasured`, and the FOCUS alignment it claimed has been removed.
+x-coverage: unmeasured
+method: generated
 finops:
 
   summary: Royal Mail API usage costs vary by API. Several foundational APIs (Barcode Allocation V1, Local Collect V3, Delivery Office Finder V1) carry no API usage charges to customers; development costs remain the customer's responsibility. The core Shipping V2 REST API and Tracking V2 APIs require an Online Business Account (OBA) and are accessed through subscription plans on the Developer Portal. Click & Drop API access is tied to a Click & Drop or ChannelShipper account.

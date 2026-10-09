@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 plans:
 
   - name: Free (No Usage Cost)
@@ -33,3 +37,33 @@ plans:
       - Royal Mail Click & Drop API
     rateLimits:
       - description: Maximum 5 API calls per second; exceeding this limit returns HTTP 429.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free (No Usage Cost)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Standard (Tracking - Low Usage)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: OBA Business Account (Shipping)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Click & Drop / ChannelShipper
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
