@@ -1,4 +1,4 @@
-# Royal Mail (royal-mail)
+# Royal Mail
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,152 +66,156 @@
 
 Royal Mail provides a suite of REST APIs for businesses to integrate shipping, tracking, label generation, barcode allocation, and Click & Drop order management directly into their fulfilment systems. APIs cover domestic and international shipment creation, label printing, manifest submission, pre-allocated tracking numbers, offline barcode ranges, local collect options, and delivery office lookup.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/royal-mail/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/royal-mail/refs/heads/main/apis.yml)
+**Areas:** Shipping · Postal Services · Labels · Tracking · Logistics · Barcodes · Click and Drop · United Kingdom
 
-## Tags
+## Royal Mail on APIs.io
 
-- Shipping
-- Postal Services
-- Labels
-- Tracking
-- Logistics
-- Barcodes
-- Click and Drop
-- UK
+Everything profiled for Royal Mail is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/royal-mail/](https://apis.io/providers/royal-mail/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+- [Royal Mail API Shipping V2 (REST)](https://apis.io/apis/royal-mail/royal-mail-api-shipping-v2-rest/) — A fully RESTful service enabling account customers to create domestic and international shipments, produce shipping labels, print customs documents,…
+- [Royal Mail Tracking V2 (REST)](https://apis.io/apis/royal-mail/royal-mail-tracking-v2-rest/) — Allows account customers to receive track-and-trace information for mail items, including current status, delivery history, and proof of delivery for single…
+- [Royal Mail Barcode Allocation V1 (REST)](https://apis.io/apis/royal-mail/royal-mail-barcode-allocation-v1-rest/) — A RESTful web service that enables API consumers to request a pre-allocated range of Royal Mail barcodes for offline use in shipping processes. No usage…
+- [Royal Mail Local Collect V3 (REST)](https://apis.io/apis/royal-mail/royal-mail-local-collect-v3-rest/) — Enables customers to benefit from Click and Collect delivery options by retrieving current lists of participating Post Offices and Royal Mail Customer…
+- [Royal Mail Delivery Office Finder V1 (REST)](https://apis.io/apis/royal-mail/royal-mail-delivery-office-finder-v1-rest/) — Enables Royal Mail customers to obtain details of the delivery office dedicated to a provided postcode, including location name, address, available…
+- [Royal Mail Labels API](https://apis.io/apis/royal-mail/royal-mail-labels-api/) — The Labels API from Royal Mail — 1 operation(s) for labels.
+- [Royal Mail Manifests API](https://apis.io/apis/royal-mail/royal-mail-manifests-api/) — The Manifests API from Royal Mail — 3 operation(s) for manifests.
+- [Royal Mail Orders API](https://apis.io/apis/royal-mail/royal-mail-orders-api/) — The Orders API from Royal Mail — 5 operation(s) for orders.
+- [Royal Mail Returns API](https://apis.io/apis/royal-mail/royal-mail-returns-api/) — Reserved for OBA customers only.
+- [Royal Mail Version API](https://apis.io/apis/royal-mail/royal-mail-version-api/) — The Version API from Royal Mail — 1 operation(s) for version.
 
-## APIs
+### Published properties
 
-### Royal Mail API Shipping V2 (REST)
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-A fully RESTful service enabling account customers to create domestic and international shipments, produce shipping labels, print customs documents, manifest shipments, pre-allocate tracking numbers, and request offline barcode ranges. Requires an Online Business Account (OBA).
+#### Agentic access (1)
 
-- **Human URL:** [https://developer.royalmail.net/taxonomy/term/91](https://developer.royalmail.net/taxonomy/term/91)
-- **Base URL:** `https://api.royalmail.net/shipping/v2`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Royal Mail Agentic Access](https://apis.io/agentic-access/royal-mail/royal-mail-agentic-access/)
 
-- Shipping
-- Labels
-- Manifests
-- Barcodes
-- International
+#### JSON Schema (2)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://developer.royalmail.net/taxonomy/term/91)
-- [Authentication](https://developer.royalmail.net/start)
+- [CreateOrderRequest](https://apis.io/schemas/royal-mail/create-order-request/)
+- [CreateOrdersResponse](https://apis.io/schemas/royal-mail/create-order-response/)
 
-### Royal Mail Click & Drop API
+#### JSON-LD (1)
 
-REST API for Click & Drop and ChannelShipper customers to import orders, retrieve order details, generate PDF shipping labels, manifest eligible orders, and create return shipments. Supports up to 2,000 orders per request and up to 5 API calls per second.
+Linked-data contexts for the provider's vocabulary.
 
-- **Human URL:** [https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API](https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API)
-- **Base URL:** `https://api.parcel.royalmail.com/api/v1`
+- [Royal Mail Context](https://apis.io/jsonld/royal-mail/royal-mail/)
 
-#### Tags
+#### Examples (3)
 
-- Click and Drop
-- Orders
-- Labels
-- Manifests
-- Returns
+Example requests and responses.
 
-#### Properties
+- [Create Order](https://apis.io/examples/royal-mail/create-order/)
+- [Create Return](https://apis.io/examples/royal-mail/create-return/)
+- [Manifest Orders](https://apis.io/examples/royal-mail/manifest-orders/)
 
-- [Documentation](https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml)
-- [OpenAPI](https://api.parcel.royalmail.com/doc/v1/click-and-drop-api-v1.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+#### Collections (5)
 
-### Royal Mail Tracking V2 (REST)
+Postman and Open Collection request collections.
 
-Allows account customers to receive track-and-trace information for mail items, including current status, delivery history, and proof of delivery for single or multiple items. Intended for server-side application use.
+- [ChannelShipper & Royal Mail Public Labels API](https://apis.io/collections/royal-mail/open-royal-mail-labels-api/)
+- [ChannelShipper & Royal Mail Public Labels Manifests API](https://apis.io/collections/royal-mail/open-royal-mail-manifests-api/)
+- [ChannelShipper & Royal Mail Public Labels Orders API](https://apis.io/collections/royal-mail/open-royal-mail-orders-api/)
+- [ChannelShipper & Royal Mail Public Labels Returns API](https://apis.io/collections/royal-mail/open-royal-mail-returns-api/)
+- [ChannelShipper & Royal Mail Public Labels Version API](https://apis.io/collections/royal-mail/open-royal-mail-version-api/)
 
-- **Human URL:** [https://developer.royalmail.net/product/175625/api/76888](https://developer.royalmail.net/product/175625/api/76888)
-- **Base URL:** `https://api.royalmail.net`
+#### Governance rules (1)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Tracking
-- Delivery
-- Proof of Delivery
+- [Royal Mail — jsonschema rules](https://apis.io/rules/royal-mail/royal-mail-jsonschema-spectral-rules/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://developer.royalmail.net/product/175625/api/76888)
-- [Authentication](https://developer.royalmail.net/start)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Royal Mail Barcode Allocation V1 (REST)
+- [Royal Mail Authentication](https://apis.io/security/royal-mail/royal-mail-authentication/)
+- [Royal Mail Domain Security](https://apis.io/security/royal-mail/royal-mail-domain-security/)
 
-A RESTful web service that enables API consumers to request a pre-allocated range of Royal Mail barcodes for offline use in shipping processes. No usage costs to customers; development costs are covered by the customer.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://developer.royalmail.net/taxonomy/term/61](https://developer.royalmail.net/taxonomy/term/61)
-- **Base URL:** `https://api.royalmail.net`
+Published plans, tiers and prices.
 
-#### Tags
+- [Plans](https://apis.io/plans/royal-mail/plans/)
 
-- Barcodes
-- Offline
-- Shipping
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://developer.royalmail.net/taxonomy/term/61)
-- [Authentication](https://developer.royalmail.net/start)
+- [Rate Limits](https://apis.io/rate-limits/royal-mail/rate-limits/)
 
-### Royal Mail Local Collect V3 (REST)
+#### FinOps (1)
 
-Enables customers to benefit from Click and Collect delivery options by retrieving current lists of participating Post Offices and Royal Mail Customer Service Points where tracked and special delivery parcels can be collected. No usage costs to customers.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://developer.royalmail.net/product](https://developer.royalmail.net/product)
-- **Base URL:** `https://api.royalmail.net`
+- [Finops](https://apis.io/finops/royal-mail/finops/)
 
-#### Tags
+## Where to find this API
 
-- Local Collect
-- Click and Collect
-- Post Office
-- Locations
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Properties
-
-- [Documentation](https://developer.royalmail.net/product)
-- [Authentication](https://developer.royalmail.net/start)
-
-### Royal Mail Delivery Office Finder V1 (REST)
-
-Enables Royal Mail customers to obtain details of the delivery office dedicated to a provided postcode, including location name, address, available facilities, and opening hours.
-
-- **Human URL:** [https://developer.royalmail.net/product](https://developer.royalmail.net/product)
-- **Base URL:** `https://api.royalmail.net`
-
-#### Tags
-
-- Delivery Office
-- Locations
-- Postcode
-
-#### Properties
-
-- [Documentation](https://developer.royalmail.net/product)
-- [Authentication](https://developer.royalmail.net/start)
-
-## Common Properties
-
-- [Portal](https://developer.royalmail.net/)
+- [Website](https://royalmail.net)
 - [Documentation](https://developer.royalmail.net/api)
-- [Getting Started](https://developer.royalmail.net/start)
+- [Getting started](https://developer.royalmail.net/start)
 - [Support](https://developer.royalmail.net/help)
-- [Plans](https://developer.royalmail.net/product)
-- [Rate Limits](https://developer.royalmail.net/help)
-- [Terms of Service](https://developer.royalmail.net/)
-- [Authentication](https://developer.royalmail.net/start)
-- [Contact](https://developer.royalmail.net/help)
+- [Terms of service](https://developer.royalmail.net/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 49.1 |
+| Contract governance | 9.8 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 18.4 |
+
+**Agent readiness 25.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/royal-mail/](https://apis.io/providers/royal-mail/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Royal Mail: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/royal-mail/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
